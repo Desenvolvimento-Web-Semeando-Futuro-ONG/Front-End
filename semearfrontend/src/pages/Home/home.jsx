@@ -11,6 +11,7 @@ import criancaFoto from "../../assets/criança.foto.png";
 import logoSemear from "../../assets/logo.semear.png";
 import fotoequipe from "../../assets/fotoequipe.png";
 import { FaWhatsapp } from "react-icons/fa";
+import CountUp from "react-countup";
 
 const Home = () => {
   return (
@@ -55,7 +56,7 @@ const Home = () => {
           <span className="subtitle">ONG - Semeando o Futuro</span>
           <h1>
             No coração das crianças e <span className="highlight">jovens</span>,
-            <br /> transformando vidas
+            transformando vidas!
           </h1>
           <button className="cta-button">Saiba mais</button>
         </div>
@@ -71,7 +72,12 @@ const Home = () => {
           </p>
         </div>
         <div className="sport-text">
-          <h2>Deixando nossas crianças felizes através do esporte</h2>
+          <h2>
+            Deixando nossas crianças felizes
+            <br />
+            através do esporte
+          </h2>
+
           <p>
             O esporte é mais do que competição: é disciplina, superação e
             esperança. Para crianças e jovens, ele abre portas, ensina valores e
@@ -125,6 +131,51 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section className="numeros-section">
+        <div className="numeros-grid">
+          <div className="numero-item verde">
+            <FaUserShield size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={100}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Crianças no Judô</p>
+          </div>
+          <div className="numero-item laranja">
+            <FaUserCircle size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={60}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Idosos Acolhidos</p>
+          </div>
+          <div className="numero-item azul">
+            <FaDumbbell size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={50}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Voluntário em Atividades</p>
+          </div>
+        </div>
+      </section>
+
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"
