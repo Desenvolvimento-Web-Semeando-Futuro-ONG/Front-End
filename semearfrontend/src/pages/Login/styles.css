@@ -78,14 +78,16 @@
   }
   
   .login-buttonn {
-    padding: 10px;
-    background-color: #00AEEF;
+    width: 100%;
+    padding: 15px;
+    background-color: #4EB4CE;
     color: white;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: bold;
+    font-size: 16px;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: background-color 0.3s ease;
   }
   
   .login-buttonn:hover {
@@ -115,6 +117,21 @@
     background-color: rgba(0, 174, 239, 0.4); 
     z-index: 1;
   }
+
+  .link-button {
+    background: none;
+    border: none;
+    color: #007caa;
+    cursor: pointer;
+    text-decoration: underline;
+    font-size: 14px;
+    padding: 0;
+  }
+  
+  .link-button:hover {
+    color: #005f7a;
+  }
+  
 
  
   
