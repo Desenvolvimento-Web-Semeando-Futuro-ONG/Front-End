@@ -5,6 +5,7 @@ import Home from "./pages/Home/home";
 import Login from "./pages/Login/login";
 import Publicacao from "./pages/Publicacao/publicacao";
 
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
