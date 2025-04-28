@@ -3,9 +3,12 @@ import ReCAPTCHA from "react-google-recaptcha";
 import "./styles.css";
 import imagemCrianca from "../../assets/loginfundo.png";
 import axios from "axios";
+import { useNavigate } from "react-router-dom"; 
 
-const Login = () => {
-  const [email, setEmail] = useState("");
+const Login = () => { 
+  const navigate = useNavigate(); 
+
+  const [login, setLogin] = useState("");  
   const [senha, setSenha] = useState("");
   const [captchaValue, setCaptchaValue] = useState(null);
   const [modoRecuperarSenha, setModoRecuperarSenha] = useState(false);
@@ -23,13 +26,17 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5238/api/login", {
-        email: email,
+      const response = await axios.post("http://localhost:5189/api/Auth/login", {
+        login: login,
         senha: senha,
         captchaToken: captchaValue,
       });
 
-      console.log("Resposta do backend:", response.data);
+      console.log("Token recebido:", response.data.token);
+      localStorage.setItem("token", response.data.token);
+
+      navigate("/publicacao"); 
+
     } catch (error) {
       console.error("Erro ao fazer login:", error);
       alert("Falha ao fazer login. Verifique seus dados.");
@@ -41,12 +48,12 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5238/api/forgot-password", {
-        email,
+        email: login, 
       });
 
       if (response.data.sucesso) {
-        alert("Email enviado! Por favor, verifique sua caixa de entrada.");
-        setModoRecuperarSenha(false); 
+        alert("Email enviado! Verifique sua caixa de entrada.");
+        setModoRecuperarSenha(false);
       } else {
         alert("Não encontramos este email. Verifique e tente novamente.");
       }
@@ -75,11 +82,11 @@ const Login = () => {
 
           {modoRecuperarSenha ? (
             <form onSubmit={handleSubmitRecuperar}>
-              <label>Email</label>
+              <label>Login (Email)</label>
               <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+                type="text" 
+                value={login} 
+                onChange={(e) => setLogin(e.target.value)} 
                 required 
               />
 
@@ -91,11 +98,11 @@ const Login = () => {
             </form>
           ) : (
             <form onSubmit={handleSubmit}>
-              <label>Email</label>
+              <label>Login</label>
               <input 
-                type="email" 
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
+                type="text" 
+                value={login} 
+                onChange={(e) => setLogin(e.target.value)} 
                 required 
               />
 
@@ -129,3 +136,4 @@ const Login = () => {
 };
 
 export default Login;
+
