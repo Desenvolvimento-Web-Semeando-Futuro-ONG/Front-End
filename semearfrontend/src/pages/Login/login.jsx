@@ -77,7 +77,7 @@ const Login = () => {
         <div className="login-box">
           <h3>Bem-vindo à</h3>
           <h1 className="titulo-logo">
-            <span>Semeando o</span><br /> <span className="azul">Futuro</span>
+            <span>Semeando o</span><br /> <span className="azull">Futuro</span>
           </h1>
 
           {modoRecuperarSenha ? (
