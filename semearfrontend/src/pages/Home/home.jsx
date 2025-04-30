@@ -1,19 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaMedal,
   FaUserShield,
   FaDumbbell,
   FaUserCircle,
+  FaWhatsapp,
 } from "react-icons/fa";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
-import { Link } from "react-router-dom";
 import criancaFoto from "../../assets/criança.foto.png";
 import logoSemear from "../../assets/logo.semear.png";
 import fotoequipe from "../../assets/fotoequipe.png";
-import { FaWhatsapp } from "react-icons/fa";
 import CountUp from "react-countup";
 
 const Home = () => {
+  const [eventos, setEventos] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    fetch("http://localhost:5189/api/Evento")
+      .then((res) => res.json())
+      .then((data) => setEventos(data))
+      .catch((err) => console.error("Erro ao buscar eventos:", err));
+  }, []);
+
   return (
     <div className="home-container">
       <header className="navbar">
@@ -66,8 +76,7 @@ const Home = () => {
         <div className="sport-image">
           <img src={criancaFoto} alt="Criança no campeonato" />
           <p className="badge">
-            40+
-            <br />
+            40+<br />
             <span>Crianças em Campeonatos</span>
           </p>
         </div>
@@ -132,44 +141,43 @@ const Home = () => {
         </div>
       </section>
 
+      
+      <section className="eventos-section">
+        <h2 className="eventos-titulo">Eventos Recentes</h2>
+        <div className="eventos-grid">
+          {eventos.map((evento) => (
+            <div
+              key={evento.id}
+              className="card-evento"
+              onClick={() => navigate(`/evento/${evento.id}`)}
+            >
+              <img src={evento.imagemUrl} alt={evento.nome} className="card-img" />
+              <h3 className="card-titulo">{evento.nome}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
+
       <section className="numeros-section">
         <div className="numeros-grid">
           <div className="numero-item verde">
             <FaUserShield size={40} className="icone-numero" />
             <h3>
-              <CountUp
-                end={100}
-                duration={2}
-                prefix="+"
-                enableScrollSpy
-                scrollSpyDelay={200}
-              />
+              <CountUp end={100} duration={2} prefix="+" enableScrollSpy scrollSpyDelay={200} />
             </h3>
             <p>Crianças no Judô</p>
           </div>
           <div className="numero-item laranja">
             <FaUserCircle size={40} className="icone-numero" />
             <h3>
-              <CountUp
-                end={60}
-                duration={2}
-                prefix="+"
-                enableScrollSpy
-                scrollSpyDelay={200}
-              />
+              <CountUp end={60} duration={2} prefix="+" enableScrollSpy scrollSpyDelay={200} />
             </h3>
             <p>Idosos Acolhidos</p>
           </div>
           <div className="numero-item azul">
             <FaDumbbell size={40} className="icone-numero" />
             <h3>
-              <CountUp
-                end={50}
-                duration={2}
-                prefix="+"
-                enableScrollSpy
-                scrollSpyDelay={200}
-              />
+              <CountUp end={50} duration={2} prefix="+" enableScrollSpy scrollSpyDelay={200} />
             </h3>
             <p>Voluntário em Atividades</p>
           </div>

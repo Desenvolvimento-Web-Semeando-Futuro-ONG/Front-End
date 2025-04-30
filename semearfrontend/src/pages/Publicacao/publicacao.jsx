@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 import logoSemear from "../../assets/logo.semear.png";
 
@@ -6,6 +7,8 @@ function Publicacao() {
   const [titulo, setTitulo] = useState('');
   const [texto, setTexto] = useState('');
   const [imagemCapa, setImagemCapa] = useState(null);
+  const [arquivoImagem, setArquivoImagem] = useState(null);
+  const navigate = useNavigate();
 
   const horaAtual = new Date().toLocaleTimeString('pt-BR', {
     hour: '2-digit',
@@ -16,6 +19,39 @@ function Publicacao() {
     const file = e.target.files[0];
     if (file) {
       setImagemCapa(URL.createObjectURL(file));
+      setArquivoImagem(file);
+    }
+  };
+
+  const handlePublicar = async () => {
+    const formData = new FormData();
+    formData.append("Nome", titulo);
+    formData.append("Descricao", texto);
+    formData.append("DataEvento", new Date().toISOString()); 
+    if (arquivoImagem) {
+      formData.append("Imagem", arquivoImagem);
+    }
+
+    const token = localStorage.getItem("token"); 
+
+    try {
+      const response = await fetch("http://localhost:5189/api/Adm/eventos", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      });
+
+      if (response.ok) {
+        alert("Evento publicado com sucesso!");
+        navigate("/"); 
+      } else {
+        alert("Erro ao publicar evento.");
+      }
+    } catch (error) {
+      console.error("Erro ao enviar:", error);
+      alert("Erro na conexão com o servidor.");
     }
   };
 
@@ -31,7 +67,7 @@ function Publicacao() {
         </div>
         <div className="botoes-header">
           <button className="btn-fechar">Fechar e Salvar</button>
-          <button className="btn-publicar">Publicar</button>
+          <button className="btn-publicar" onClick={handlePublicar}>Publicar</button>
         </div>
       </header>
 
