@@ -1,0 +1,43 @@
+.testemunhos-section {
+    text-align: center;
+    padding: 100px 20px;
+  }
+  
+  .titulo-testemunhos {
+    color: #40b7dd;
+    font-weight: 750;
+    font-size: 4rem;
+    margin-bottom: 40px;
+  }
+  
+  .meu-swiper {
+    max-width: 800px;
+    margin: 0 auto;
+    padding-bottom: 40px; 
+    position: relative;   
+  }
+  
+  .swiper-pagination {
+    margin-top: 20px; 
+  }
+  
+  .texto-testemunho {
+    font-size: 1.2rem;
+    color: #333;
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1;
+  }
+
+  .swiper-button-next,
+.swiper-button-prev {
+  color: #40b7dd;
+  top: 50%;
+  width: 40px;
+  height: 40px;
+}
+
+
+
+
+  

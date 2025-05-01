@@ -31,6 +31,28 @@
   font-weight: bold;
 }
 
+.navbar a {
+  text-decoration: none;
+  color: inherit; 
+  position: relative;
+}
+
+.navbar a::after {
+  content: '';
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  left: 0;
+  bottom: -2px;
+  background-color: #81c04f;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+  width: 100%;
+}
+
+
 .login-button {
   background-color: #81c04f;
   color: white;
@@ -121,10 +143,10 @@
 .sport-section {
   position: relative;
   display: flex;
-  justify-content: space-around;
+  gap: 7rem;
   align-items: center;
   padding: 80px 40px;
-  background: #f5f9f8;
+  background: rgba(255, 255, 255, 0.61);
   overflow: hidden;
 }
 
@@ -137,15 +159,17 @@
   width: 130%;
   background-image: repeating-linear-gradient(
     to right,
-    #f0d8b5,
-    #fdebd0 100px,
-    #b2d0e6 100px,
-    #d6eaf8 200px,
-    #d5f5e3 200px,
-    #d5f5e3 300px
+    #fcf4ea,          
+    #fde5c4 150px,    
+    #fcd3d7 150px,     
+    #ebd7fa 250px,     
+    #d8edf2 250px,     
+    #d4f1dd 350px      
   );
   z-index: 1;
 }
+
+
 
 .sport-section::after {
   content: "";
@@ -161,187 +185,240 @@
 
 .sport-image {
   position: relative;
-  max-width: 400px;
+  max-width: 500px;
   z-index: 2;
+  margin-left: 100px;
 }
 
 .sport-image img {
   width: 100%;
   border-radius: 20px;
   z-index: 1;
+  margin-top: -50px;
 
-}
-
-.sport-image .badge {
-  background: white;
-  padding: 10px 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  font-weight: bold;
-  color: #e63946;
-  position: absolute;
-  bottom: -20px;
-  left: 20px;
-  font-size: 1.5rem;
-}
-
-.sport-image .badge span {
-  display: block;
-  font-size: 0.8rem;
-  color: #333;
 }
 
 .sport-text h2 {
-  font-family: "Abril Fatface", cursive;
-  font-size: 2rem;
-  margin-bottom: 10px;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 2.5rem;
+   margin-top: -50px;
   color: #36405B;
-}
+  line-height: 1.1;
 
+
+}
 
 .sport-text p {
-  margin-bottom: 15px;
-  line-height: 1.6;
-  color: #444;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.1rem;
+  color: #36405B;
+  line-height: 1.5;
 }
 
-.benefits {
-  list-style: none;
-  padding: 0;
+
+.sport-text {
+  z-index: 2;
+}
+.badge {
+  background: white;
+  padding: 10px 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  position: absolute;
+  bottom: -20px;
+  left: 20px;
+  text-align: left;
+  display: inline-block;
 }
 
-.benefits li {
-  margin: 10px 0;
+.badge-number {
+  font-weight: 900;
+  font-size: 2rem;
+  color: #f37f21;
+  font-family: 'Roboto', sans-serif;
+  display: block;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.badge-text {
+  font-size: 1rem;
+  color: #36405B;
+  font-weight: 700;
+  font-family: 'Roboto', sans-serif;
+  line-height: ac kcjk 1.2;
+}
+
+
+.impact-section {
+  position: relative;
+  padding-left: 35px;
+  margin-top: 40px;
+}
+
+.timeline-line {
+  position: absolute;
+  top: 0;
+  left: -4px;
+  width: 2px;
+  height: 100%;
+  background-color: #81c04f; 
+}
+
+.impact-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 40px;
+}
+
+.icon-box {
+  background-color: #81c04f;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
   display: flex;
   align-items: center;
-  font-weight: bold;
+  justify-content: center;
+  margin-right: 16px;
+  flex-shrink: 0;
+  font-size: 18px;
 }
 
-.benefits .icon.green {
-  color: #81c04f;
-  margin-right: 10px;
+.impact-content h3 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  color: #2e305c; /* azul escuro */
+  margin: 0 0 5px;
 }
 
-.benefits span {
-  display: block;
-  font-weight: normal;
-  color: #777;
+.impact-content p {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300; /* bem fino */
+  margin: 0;
+  color: #555;
 }
+
 
 .sobre-section {
   position: relative;
-  padding: 80px 60px;
-  background: #fff;
-  overflow: hidden;
+  background-image: url('../../assets/fundoabout.png');
+  background-size: 85%; 
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 70px 20px;
+  z-index: 1;
 }
 
-.fundo-decorativo {
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.1;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
 
 .sobre-content {
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  z-index: 1;
-  position: relative;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2; 
 }
 
 .sobre-texto {
   flex: 1;
-  max-width: 550px;
+  color: #2e305c;
+  margin-bottom: 80px; 
+
 }
 
 .sobre-texto h2 {
   font-size: 2.5rem;
-  color: #0f7e9a;
   margin-bottom: 20px;
+  background: linear-gradient(90deg, #F1613A 0%, #0F7E9A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .sobre-texto .destaque {
-  color: #f55b50;
+  color: inherit; 
 }
 
+
 .sobre-texto p {
-  font-size: 1.1rem;
-  color: #444;
+  font-size: 1.2rem;
   line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
 }
 
 .sobre-texto .mensagem {
-  margin-top: 15px;
-}
-
-.destaque-verde {
-  color: #339966;
   font-weight: bold;
 }
 
-.sobre-foto {
-  flex: 1;
-  max-width: 500px;
+.destaque-verde {
+  color: #1fa67a;
 }
 
 .sobre-foto img {
   width: 100%;
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
+
 .numeros-section {
-  display: flex;
-  justify-content: center;
-  margin: 50px 0;
+  padding: 40px 20px;
+  text-align: center;
+  margin-top: 60px;
 }
 
 .numeros-grid {
   display: flex;
-  gap: 20px;
-  width: 80%;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 150px;
 }
 
 .numero-item {
-  flex: 1;
-  padding: 20px;
+  flex: 1 1 300px;
+  max-width: 350px;
+  padding: 50px 20px;
   border-radius: 10px;
   color: white;
-  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  margin-top: 100px;
+}
+
+.numero-item .icone-texto {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  justify-content: center;
 }
 
 .numero-item h3 {
-  font-size: 2.5rem;
-  margin: 10px 0;
+  font-family: 'Abril Fatface', cursive;
+  font-size: 3rem;
+  margin: 0;
 }
 
 .numero-item p {
-  font-size: 1.2rem;
-}
-
-.verde {
-  background-color: #88b563;
-}
-
-.laranja {
-  background-color: #f38c4b;
-}
-
-.azull {
-  background-color: #4ab6d6;
+  font-size: 1.7rem;
+  margin: 5px 0 0;
 }
 
 .icone-numero {
-  margin-bottom: 10px;
+  font-size: 40px;
+  opacity: 0.9;
+}
+
+.verde {
+  background-color: #8ABF60;
+}
+
+.laranja {
+  background-color: #F28C4B;
+}
+
+.azul {
+  background-color: #4FC0DF;
 }
 
 
@@ -351,10 +428,12 @@
   right: 20px;
   z-index: 999;
   transition: transform 0.3s ease;
+  color: #25D366; 
 }
 
+
 .whatsapp-icon:hover {
-  transform: scale(1.1);
+  transform: scale(1.5);
 }
 
 .login-icon a.login-link {
