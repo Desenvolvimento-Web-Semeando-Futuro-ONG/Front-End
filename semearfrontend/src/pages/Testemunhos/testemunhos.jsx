@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import './styles.css'; 
 
 const testemunhos = [
-    `"Oi Bianca! Queria muito agradecer pelo que vocês fazem pelo nosso filho. Desde que ele começou a participar das atividades da ONG, percebemos uma mudança enorme no comportamento dele. Está mais alegre, comunicativo e sempre animado para as aulas. Isso enche nossos corações de felicidade. Obrigada por tanto carinho e dedicação com ele e com todas as crianças!"`,
+    `"Queria muito agradecer pelo que vocês fazem pelo nosso filho. Desde que ele começou a participar das atividades da ONG, percebemos uma mudança enorme no comportamento dele. Está mais alegre, comunicativo e sempre animado para as aulas. Isso enche nossos corações de felicidade. Obrigada por tanto carinho e dedicação com ele e com todas as crianças!"`,
   
     `"Essa ONG transformou completamente a minha vida e a da minha família. Quando chegamos aqui, estávamos passando por um momento muito difícil, sem direção. Mas com o apoio que recebemos, conseguimos nos reerguer. A atenção, o cuidado e o amor que vocês têm com cada um é algo que jamais esquecerei. Só temos gratidão por tudo que vocês fazem!"`,
   

@@ -1,0 +1,159 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Lato:wght@400;700&family=Roboto:wght@300;400&display=swap');
+
+
+.banner {
+    background-image: url('../../assets/home.foto.png'); 
+    background-size: cover;
+    background-position: center;
+    padding: 100px 50px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .banner-content h1 {
+    font-size: 3rem;
+    margin: 0;
+    background: rgba(0, 0, 0, 0.5); 
+
+  }
+  
+  .banner-content h2 {
+    font-size: 1.5rem;
+    margin-top: 10px;
+  }
+ 
+.projeto-judo {
+  margin-top: -20px;
+}
+
+.projeto-conteudo {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 40px;
+  border-radius: 12px;
+  font-family: 'Lato', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  background-image: url('../../assets/fundo..png');
+
+}
+
+.projeto-banner {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.projeto-banner h1 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 2.8rem;
+  color: #36405B;
+  margin-bottom: 8px;
+}
+
+.projeto-banner h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: #555;
+}
+
+.projeto-conteudo p {
+  margin-bottom: 24px;
+}
+
+.projeto-conteudo strong {
+  color: #F1613A;
+}
+
+.projeto-imagens {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin: 24px 0;
+}
+
+.projeto-imagens img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.projeto-timeline {
+  background: #fff;
+  padding: 24px;
+  border-left: 4px solid #F1613A;
+  margin: 32px 0;
+  border-radius: 4px;
+}
+
+.projeto-timeline h3 {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.6rem;
+  color: #36405B;
+  margin-bottom: 12px;
+}
+
+.projeto-timeline p {
+  margin-bottom: 16px;
+}
+
+.projeto-call {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.projeto-call h3 {
+  font-family: 'Abril Fatface', cursive;
+  font-size: 1.8rem;
+  color: #F1613A;
+  margin-bottom: 12px;
+}
+
+.projeto-call p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.projeto-call button {
+  font-family: 'Lato', sans-serif;
+  background-color: #F1613A;
+  color: #fff;
+  border: none;
+  padding: 14px 28px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.projeto-call button:hover {
+  background-color: #d94e2c;
+  transform: translateY(-2px);
+}
+
+.banner-content h1 {
+    font-size: 2.8rem;
+    background: linear-gradient(90deg, #ce8a0d, #dcdde4);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .banner-content h2 {
+    font-size: 1.4rem;
+    background: linear-gradient(90deg, #F1613A, #F39150);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+@media (max-width: 768px) {
+  .projeto-imagens {
+    grid-template-columns: 1fr;
+  }
+  .projeto-conteudo {
+    padding: 24px;
+  }
+}

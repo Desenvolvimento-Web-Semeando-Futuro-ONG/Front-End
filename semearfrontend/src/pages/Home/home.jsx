@@ -5,19 +5,26 @@ import {
   FaDumbbell,
   FaUserCircle,
   FaWhatsapp,
+  FaUsers,
+  FaTrophy,
+  FaRunning,
+  FaFistRaised,
+  FaBlind,
+  FaHeart,
 } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import criancaFoto from "../../assets/criança.foto.png";
 import logoSemear from "../../assets/logo.semear.png";
 import fotoequipe from "../../assets/fotoequipe.png";
+import judocriancas from "../../assets/judo.png";
+import idosos from "../../assets/idosos.png";
+import recreativa from "../../assets/recreativa.png";
+import fotocard from "../../assets/fotocard.png";
 import CountUp from "react-countup";
-import { FaUsers, FaTrophy, FaRunning } from "react-icons/fa";
-import { FaFistRaised, FaBlind, FaHeart } from 'react-icons/fa';
-import Testemunhos from '../Testemunhos/testemunhos';
-
-
-
+import Testemunhos from "../Testemunhos/testemunhos";
+import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
+import Navbar from "../../components/Menu/Navbar";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -31,41 +38,10 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="home-container">
-      <header className="navbar">
-        <div className="logo">
-          <img src={logoSemear} alt="Logo ONG" />
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href="#">Home</a>
-            </li>
-            <li>
-              <a href="#">Projetos</a>
-            </li>
-            <li>
-              <a href="#">Eventos</a>
-            </li>
-            <li>
-              <a href="#">Sobre</a>
-            </li>
-            <li>
-              <a href="#">Doações</a>
-            </li>
-            <li>
-              <a href="#">Contato</a>
-            </li>
-          </ul>
-        </nav>
-        <div className="login-icon">
-          <Link to="/login">
-            <button className="login-button">
-              <FaUserCircle size={20} /> Login
-            </button>
-          </Link>
-        </div>
-      </header>
+    <>
+      <div className="home-container">
+        <Navbar />
+      </div>
 
       <section className="hero-section">
         <div className="hero-content">
@@ -79,13 +55,17 @@ const Home = () => {
       </section>
 
       <section className="sport-section">
-      <div className="sport-image">
-  <img src={criancaFoto} alt="Criança no campeonato" />
-  <div className="badge">
-    <span className="badge-number">40+</span>
-    <span className="badge-text">Crianças em<br />Campeonatos</span>
-  </div>
-</div>
+        <div className="sport-image">
+          <img src={criancaFoto} alt="Criança no campeonato" />
+          <div className="badge">
+            <span className="badge-number">40+</span>
+            <span className="badge-text">
+              Crianças em
+              <br />
+              Campeonatos
+            </span>
+          </div>
+        </div>
 
         <div className="sport-text">
           <h2>
@@ -108,7 +88,7 @@ const Home = () => {
             <div className="timeline-line"></div>
             <div className="impact-item">
               <div className="icon-box">
-              <FaUsers />
+                <FaUsers />
               </div>
               <div className="impact-content">
                 <h3>Esporte é inclusão</h3>
@@ -117,7 +97,7 @@ const Home = () => {
             </div>
             <div className="impact-item">
               <div className="icon-box">
-              <FaTrophy />
+                <FaTrophy />
               </div>
               <div className="impact-content">
                 <h3>Uma chance muda tudo</h3>
@@ -128,7 +108,7 @@ const Home = () => {
             </div>
             <div className="impact-item">
               <div className="icon-box">
-              <FaRunning />
+                <FaRunning />
               </div>
               <div className="impact-content">
                 <h3>Sonhos em movimento</h3>
@@ -146,16 +126,18 @@ const Home = () => {
               <span className="destaque">S</span>emeando o Futuro
             </h2>
             <p>
-              <strong>Fundada em 2021, a ONG Semeando o Futuro</strong><br /> nasceu
-              do desejo de transformar vidas e criar oportunidades<br /> para
-              mulheres, crianças e idosos na comunidade da Lagoa do Araçá.
+              <strong>Fundada em 2021, a ONG Semeando o Futuro</strong>
+              <br /> nasceu do desejo de transformar vidas e criar oportunidades
+              <br /> para mulheres, crianças e idosos na comunidade da Lagoa do
+              Araçá.
             </p>
             <p className="mensagem">
               Mais do que um espaço de apoio, a Semeando o Futuro é um farol de
-              esperança,{" "}<br />
+              esperança, <br />
               <span className="destaque-verde">
-              provando que, com união e solidariedade, é possível transformar
-                a realidade e <br />construir um amanhã melhor para todos.
+                provando que, com união e solidariedade, é possível transformar
+                a realidade e <br />
+                construir um amanhã melhor para todos.
               </span>
             </p>
           </div>
@@ -185,52 +167,95 @@ const Home = () => {
         </div>
       </section> */}
 
-<section className="numeros-section">
-  <div className="numeros-grid colado">
-    <div className="numero-item verde">
-      <FaFistRaised size={40} className="icone-numero" />
-      <h3>
-        <CountUp
-          end={100}
-          duration={2}
-          prefix="+"
-          enableScrollSpy
-          scrollSpyDelay={200}
-        />
-      </h3>
-      <p>Crianças no Judô</p>
-    </div>
+      <section className="numeros-section">
+        <div className="numeros-grid colado">
+          <div className="numero-item verde">
+            <FaFistRaised size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={100}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Crianças no Judô</p>
+          </div>
 
-    <div className="numero-item laranja">
-      <FaBlind size={40} className="icone-numero" />
-      <h3>
-        <CountUp
-          end={60}
-          duration={2}
-          prefix="+"
-          enableScrollSpy
-          scrollSpyDelay={200}
-        />
-      </h3>
-      <p>Idosos Acolhidos</p>
-    </div>
+          <div className="numero-item laranja">
+            <FaBlind size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={60}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Idosos Acolhidos</p>
+          </div>
 
-    <div className="numero-item azul">
-      <FaHeart size={40} className="icone-numero" />
-      <h3>
-        <CountUp
-          end={50}
-          duration={2}
-          prefix="+"
-          enableScrollSpy
-          scrollSpyDelay={200}
-        />
-      </h3>
-      <p>Voluntário em Atividades</p>
-    </div>
-  </div>
-  <Testemunhos />
-</section>
+          <div className="numero-item azul">
+            <FaHeart size={40} className="icone-numero" />
+            <h3>
+              <CountUp
+                end={50}
+                duration={2}
+                prefix="+"
+                enableScrollSpy
+                scrollSpyDelay={200}
+              />
+            </h3>
+            <p>Voluntário em Atividades</p>
+          </div>
+        </div>
+        <Testemunhos />
+      </section>
+
+      <section className="projetos-section">
+        <div className="projetos-header">
+          <h4 className="projetos-subtitulo">
+            CONHEÇA UM POUCO DOS NOSSOS PROJETOS
+          </h4>
+          <h2 className="projetos-titulo">Projetos na Semeando o Futuro</h2>
+        </div>
+
+        <div className="projetos-grid">
+          <Link to="/projeto-judo">
+            <ProjetoCard
+              titulo="Judô para as Crianças"
+              descricao="Aula de judô para as crianças todos os finais de semana para crianças carentes da comunidade"
+              imagem={judocriancas}
+            />
+          </Link>
+
+          <Link to="/projetos/recreativa">
+            <ProjetoCard
+              titulo="Atividades Recreativas"
+              descricao="Oficinas divertidas para crianças e jovens nos finais de semana"
+              imagem={recreativa}
+            />
+          </Link>
+
+          <Link to="/projetos/idosos">
+            <ProjetoCard
+              titulo="Atividades com Idosos"
+              descricao="Aulas de instrumentos e canto para jovens talentos"
+              imagem={idosos}
+            />
+          </Link>
+
+          <Link to="/projetos/eventos">
+            <ProjetoCard
+              titulo="Organização de Eventos"
+              descricao="Aulas de dança para promover saúde e autoestima"
+              imagem={fotocard}
+            />
+          </Link>
+        </div>
+      </section>
 
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
@@ -240,8 +265,9 @@ const Home = () => {
       >
         <FaWhatsapp size={38} color="#25D366" />
       </a>
-    </div>
+    </>
   );
 };
 
 export default Home;
+

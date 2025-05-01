@@ -1,0 +1,13 @@
+.projetos-section {
+    background-color: #f6f6f6;
+    padding: 40px 20px;
+  }
+  
+  .projetos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 900px;
+    margin: 0 auto; 
+  }
+  

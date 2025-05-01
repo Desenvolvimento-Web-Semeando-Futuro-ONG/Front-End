@@ -4,6 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/home";
 import Login from "./pages/Login/login";
 import Publicacao from "./pages/Publicacao/publicacao";
+import Judo from "./pages/Projetos/projetojudo";
+
 
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -13,6 +15,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/publicacao" element={<Publicacao />} />
+        <Route path="/projeto-judo" element={<Judo />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
