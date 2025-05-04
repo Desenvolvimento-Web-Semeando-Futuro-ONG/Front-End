@@ -5,6 +5,8 @@ import Home from "./pages/Home/home";
 import Login from "./pages/Login/login";
 import Publicacao from "./pages/Publicacao/publicacao";
 import Judo from "./pages/Projetos/projetojudo";
+import Evento from './pages/Evento/evento'; 
+
 
 
 
@@ -16,6 +18,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/login" element={<Login />} />
         <Route path="/publicacao" element={<Publicacao />} />
         <Route path="/projeto-judo" element={<Judo />} />
+        <Route path="/evento/:id" element={<Evento />} />
+
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
