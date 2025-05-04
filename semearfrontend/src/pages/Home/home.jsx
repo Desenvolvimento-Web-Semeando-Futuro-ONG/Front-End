@@ -278,7 +278,7 @@ const Home = () => {
       </div>
     </section>
       <a
-        href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
+        href="https://wa.me/5581986541494?text=%20Olá!%20Gostaria%20de%20saber%20como%20posso%20ajudar%20na%20ONG%20como%20voluntário(a)%20ou%20com%20uma%20doação.%20Pode%20me%20orientar?"
         className="whatsapp-icon"
         target="_blank"
         rel="noopener noreferrer"
