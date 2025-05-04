@@ -30,7 +30,7 @@ import Testemunhos from "../Testemunhos/testemunhos";
 import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
 import Navbar from "../../components/Menu/Navbar";
 import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
-import {FaHandsHelping, FaBookOpen, FaBus, FaTshirt} from "react-icons/fa";
+import { FaHandsHelping, FaBookOpen, FaBus, FaTshirt } from "react-icons/fa";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -246,6 +246,7 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
       <section className="eventos-section">
         <h4 className="eventos-titulo">
           Eventos especiais da ONG Semeando o Futuro
@@ -259,7 +260,7 @@ const Home = () => {
               onClick={() => navigate(`/evento/${evento.id}`)}
             >
               <img
-                src={evento.imagemUrl}
+                src={`http://localhost:5189/api/galeria/${evento.imagemId}`}
                 alt={evento.nome}
                 className="card-img"
               />
@@ -268,6 +269,7 @@ const Home = () => {
           ))}
         </div>
       </section>
+
       <section className="banner-voluntario">
         <div className="conteudo-banner">
           <h2>Seja voluntário da nossa ONG</h2>
@@ -330,7 +332,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      
+
       <section className="doacao-section">
         <div className="doacao-container">
           <div className="doacao-texto">
