@@ -1,0 +1,166 @@
+.formulario-voluntario-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.4s ease-in-out;
+    z-index: 1000;
+    color: #4e4958;
+
+  }
+  
+  .formulario-voluntario-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    animation: slideUp 0.4s ease-in-out;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .formulario-voluntario-fechar {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #ff3b30;
+    transition: color 0.3s ease;
+    z-index: 10;
+  }
+  
+  .formulario-voluntario-fechar:hover {
+    color: #d93025;
+  }
+  
+  .formulario-voluntario-titulo {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .formulario-voluntario-form input,
+  .formulario-voluntario-form select,
+  .formulario-voluntario-form textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    color: #4e4958;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .formulario-voluntario-form input:focus,
+  .formulario-voluntario-form select:focus,
+  .formulario-voluntario-form textarea:focus {
+    border-color: #4cc9f0;
+    box-shadow: 0 0 5px rgba(76, 201, 240, 0.6);
+    outline: none;
+  }
+  
+  .formulario-voluntario-textarea {
+    min-height: 100px;
+    resize: vertical;
+
+  }
+  
+  .formulario-voluntario-habilidades-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    color: #4e4958;
+
+  }
+  
+  .formulario-voluntario-habilidade-option {
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+    color: #4e4958;
+
+  }
+  
+  .formulario-voluntario-habilidade-option:hover {
+    background-color: #4cc9f0;
+    color: #4e4958;
+
+  }
+  
+  .formulario-voluntario-privacidade {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+  
+  .formulario-voluntario-privacidade-texto {
+    font-size: 14px;
+
+  }
+  
+  .formulario-voluntario-privacidade-label {
+    font-size: 14px;
+  }
+  
+  .formulario-voluntario-botao-enviar {
+    background-color: #4cc9f0;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .formulario-voluntario-botao-enviar:hover {
+    background-color: #3b94d9;
+  }
+  
+  .formulario-voluntario-mensagem-sucesso {
+    margin-top: 15px;
+    color: green;
+    font-weight: bold;
+    text-align: center;
+  }
+
+
+  
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(60px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+
+   

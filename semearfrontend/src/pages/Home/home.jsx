@@ -25,10 +25,20 @@ import CountUp from "react-countup";
 import Testemunhos from "../Testemunhos/testemunhos";
 import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
 import Navbar from "../../components/Menu/Navbar";
+import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
   const navigate = useNavigate();
+  const [mostrarFormulario, setMostrarFormulario] = useState(false);
+
+  const abrirFormulario = () => {
+    setMostrarFormulario(true);
+  };
+
+  const fecharFormulario = () => {
+    setMostrarFormulario(false);
+  };
 
   useEffect(() => {
     fetch("http://localhost:5189/api/Evento")
@@ -236,7 +246,10 @@ const Home = () => {
         </div>
       </section>
       <section className="eventos-section">
-        <h2 className="eventos-titulo">Eventos Recentes</h2>
+        <h4 className="eventos-titulo">
+          Eventos especiais da ONG Semeando o Futuro
+        </h4>
+        <h2 className="projetos-titulo">Nossos Eventos Recentes</h2>
         <div className="eventos-grid">
           {eventos.map((evento) => (
             <div
@@ -254,6 +267,16 @@ const Home = () => {
           ))}
         </div>
       </section>
+      <section className="banner-voluntario">
+      <div className="conteudo-banner">
+        <h2>Seja voluntário da nossa ONG</h2>
+        <p>Clique no botão e veja quais são os projetos disponíveis!</p>
+        <button className="botao-voluntario" onClick={abrirFormulario}>
+          Seja Voluntário
+        </button>
+        {mostrarFormulario && <FormsVoluntario fecharFormulario={fecharFormulario} />}
+      </div>
+    </section>
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"
