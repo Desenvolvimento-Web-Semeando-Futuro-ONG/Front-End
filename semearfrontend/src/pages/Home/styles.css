@@ -438,16 +438,16 @@
   transform: scale(1.5);
 }
 
-/* .login-icon a.login-link {
+.login-icon a.login-link {
     text-decoration: none;
   }
   
   .login-icon a {
     text-decoration: none;
-  } */
+  } 
   
 
-  /* .eventos-section {
+   .eventos-section {
     padding: 40px 20px;
     background-color: #f4f4f4;
     text-align: center;
@@ -492,7 +492,7 @@
     font-weight: bold;
     font-size: 1.1rem;
     color: #333;
-  } */
+  }
   
   
 .projetos-section {
