@@ -260,7 +260,7 @@ const Home = () => {
               onClick={() => navigate(`/evento/${evento.id}`)}
             >
               <img
-                src={`http://localhost:5189/api/galeria/${evento.imagemId}`}
+                src={evento.imagemId ? `http://localhost:5189/api/galeria/${evento.imagemId}` : fotocard}
                 alt={evento.nome}
                 className="card-img"
               />
