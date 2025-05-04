@@ -21,11 +21,16 @@ import judocriancas from "../../assets/judo.png";
 import idosos from "../../assets/idosos.png";
 import recreativa from "../../assets/recreativa.png";
 import fotocard from "../../assets/fotocard.png";
+import idosa from "../../assets/idosafoto.png";
+import estudantes from "../../assets/estudantesfoto.png";
+import criancasevento from "../../assets/criancasevento.png";
+import criancascozinha from "../../assets/cozinhacriancas.png";
 import CountUp from "react-countup";
 import Testemunhos from "../Testemunhos/testemunhos";
 import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
 import Navbar from "../../components/Menu/Navbar";
 import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
+import {FaHandsHelping, FaBookOpen, FaBus, FaTshirt} from "react-icons/fa";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -52,7 +57,6 @@ const Home = () => {
       <div className="home-container">
         <Navbar />
       </div>
-
       <section className="hero-section">
         <div className="hero-content">
           <span className="subtitle">ONG - Semeando o Futuro</span>
@@ -63,7 +67,6 @@ const Home = () => {
           <button className="cta-button">Saiba mais</button>
         </div>
       </section>
-
       <section className="sport-section">
         <div className="sport-image">
           <img src={criancaFoto} alt="Criança no campeonato" />
@@ -128,7 +131,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="sobre-section">
         <div className="sobre-content">
           <div className="sobre-texto">
@@ -202,7 +204,6 @@ const Home = () => {
         </div>
         <Testemunhos />
       </section>
-
       <section className="projetos-section">
         <div className="projetos-header">
           <h4 className="projetos-subtitulo">
@@ -268,15 +269,119 @@ const Home = () => {
         </div>
       </section>
       <section className="banner-voluntario">
-      <div className="conteudo-banner">
-        <h2>Seja voluntário da nossa ONG</h2>
-        <p>Clique no botão e veja quais são os projetos disponíveis!</p>
-        <button className="botao-voluntario" onClick={abrirFormulario}>
-          Seja Voluntário
-        </button>
-        {mostrarFormulario && <FormsVoluntario fecharFormulario={fecharFormulario} />}
-      </div>
-    </section>
+        <div className="conteudo-banner">
+          <h2>Seja voluntário da nossa ONG</h2>
+          <p>Clique no botão e veja quais são os projetos disponíveis!</p>
+          <button className="botao-voluntario" onClick={abrirFormulario}>
+            Seja Voluntário
+          </button>
+          {mostrarFormulario && (
+            <FormsVoluntario fecharFormulario={fecharFormulario} />
+          )}
+        </div>
+      </section>
+      <section className="pessoas-section">
+        <h2>
+          Pessoas Que Fazem <br />A Diferença na Semeando
+        </h2>
+
+        <div className="pessoas-grid">
+          <div className="pessoa-card">
+            <img src={idosa} className="pessoa-img" />
+            <div className="pessoa-info verde">
+              <p className="texto-pessoas">
+                “Momentos com idosos são realizados semanalmente com atividades
+                que estimulam a convivência, autoestima e alegria de viver.”
+              </p>
+            </div>
+          </div>
+
+          <div className="pessoa-card">
+            <img src={estudantes} className="pessoa-img" />
+            <div className="pessoa-info laranja">
+              <p className="texto-pessoas">
+                “Estudantes universitários nos visitaram e realizaram uma
+                doação, para compra de kimonos celebrando conosco o Dia das Mães
+                com carinho e solidariedade.”
+              </p>
+            </div>
+          </div>
+
+          <div className="pessoa-card">
+            <img src={criancasevento} className="pessoa-img" />
+            <div className="pessoa-info verde">
+              <p className="texto-pessoas">
+                “Um palhaço animou as crianças ao ar livre em um momento de
+                descontração e risos que ficou marcado na memória de todos, um
+                momento mágico.”
+              </p>
+            </div>
+          </div>
+
+          <div className="pessoa-card">
+            <img src={criancascozinha} className="pessoa-img" />
+            <div className="pessoa-info laranja">
+              <p className="texto-pessoas">
+                “Crianças participaram de uma oficina na cozinha onde puderam
+                preparar chocolates com apoio dos voluntários que participam
+                dessas atividades.”
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <section className="doacao-section">
+        <div className="doacao-container">
+          <div className="doacao-texto">
+            <p className="doacao-subtitulo">
+              FAÇA SUA DOAÇÃO E AJUDE NESSA CAUSA
+            </p>
+            <h2>
+              Contribua para a nossa ONG,
+              <br />
+              sua doação irá ajudar a manter o projeto
+            </h2>
+            <p className="doacao-descricao">
+              Com sua doação, você ajuda crianças e jovens a continuarem
+              treinando, competindo e sonhando alto. Cada contribuição cobre
+              custos com transporte, uniformes, alimentação e inscrições em
+              campeonatos.
+            </p>
+
+            <div className="doacao-beneficios">
+              <div className="beneficio">
+                <FaHandsHelping className="icone-beneficio" />
+                <span>Ações sociais</span>
+              </div>
+              <div className="beneficio">
+                <FaBookOpen className="icone-beneficio" />
+                <span>Atividades educativas</span>
+              </div>
+              <div className="beneficio">
+                <FaBus className="icone-beneficio" />
+                <span>Transporte</span>
+              </div>
+              <div className="beneficio">
+                <FaTshirt className="icone-beneficio" />
+                <span>Kimonos e uniformes</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="doacao-imagem">
+            <div className="overlay">
+              <h3>
+                Faça sua doação e nos ajude a<br />
+                transformar vidas com
+                <br />
+                oportunidades e esperança!
+              </h3>
+              <button className="botao-doacao">Doação</button>
+            </div>
+          </div>
+        </div>
+      </section>
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"

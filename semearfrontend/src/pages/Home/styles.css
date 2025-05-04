@@ -445,7 +445,6 @@
     text-decoration: none;
   } 
   
-
    .eventos-section {
     padding: 40px 20px;
     /* background-color: #f4f4f4; */
@@ -637,4 +636,203 @@
 
 .botao-voluntario:hover {
   background-color: #d96b1c;
+}
+.pessoas-section {
+  text-align: center;
+  padding: 80px 20px;
+  background-color: #fff;
+  background-image: url('../../assets/fundoabout.png');
+  background-size: cover;           
+  background-position: center;      
+  background-repeat: no-repeat;     
+  backdrop-filter: brightness(0.99);
+}
+
+.pessoas-section h2 {
+  font-size: 1.8rem;
+  margin-bottom: 40px;
+  font-family: Lato, sans-serif;
+  color: #2A8DAD;
+}
+
+.pessoas-section .azul {
+  color: #2A8DAD;
+}
+
+.pessoas-section .cinza {
+  color: #555;
+}
+
+.pessoas-section .laranja {
+  color: #F39150;
+}
+
+.pessoas-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.pessoa-card {
+  width: 250px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+.pessoa-img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+}
+
+.pessoa-info {
+  padding: 15px;
+  color: white;
+}
+
+.pessoa-info h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.pessoa-info span {
+  font-size: 0.9rem;
+  font-weight: normal;
+  display: block;
+  margin-top: 4px;
+}
+
+.verde {
+  background-color: #8DC73F;
+}
+
+.laranja {
+  background-color: #F39150;
+}
+
+.texto-pessoas {
+  color: #36405B; 
+  font-weight: 500; 
+  font-size: 1.2rem; 
+  line-height: 1.4;
+  margin-top: 10px;
+  padding: 0 10px;
+  text-align: center;
+}
+
+.pessoa-card {
+  width: 280px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.pessoa-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
+.doacao-section {
+  width: 90%;
+  background-color: #f9f9f9;
+  padding: 50px 10px;
+}
+
+.doacao-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.doacao-texto {
+  flex: 1;
+  padding: 20px;
+}
+
+.doacao-subtitulo {
+  color: #ff6600;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.doacao-texto h2 {
+  font-size: 28px;
+  color: #1d1d1d;
+  margin-bottom: 15px;
+}
+
+.doacao-descricao {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.doacao-beneficios {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.beneficio {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  color: #333;
+}
+
+.icone-beneficio {
+  font-size: 24px;
+  color: #4caf50;
+}
+
+.doacao-imagem {
+  flex: 1;
+  min-height: 400px;
+  background-image: url('../../assets/voluntarios.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  background-color: rgba(0, 102, 153, 0.75);
+  color: white;
+  padding: 40px;
+  height: 80%; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;
+}
+
+.overlay h3 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.botao-doacao {
+  background-color: #ff914d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+  width: fit-content;
+  align-self: flex-start;
+}
+
+.botao-doacao:hover {
+  background-color: #e67c30;
 }
