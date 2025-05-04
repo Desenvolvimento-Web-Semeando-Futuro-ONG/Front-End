@@ -146,27 +146,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
-      {/* <section className="eventos-section">
-        <h2 className="eventos-titulo">Eventos Recentes</h2>
-        <div className="eventos-grid">
-          {eventos.map((evento) => (
-            <div
-              key={evento.id}
-              className="card-evento"
-              onClick={() => navigate(`/evento/${evento.id}`)}
-            >
-              <img
-                src={evento.imagemUrl}
-                alt={evento.nome}
-                className="card-img"
-              />
-              <h3 className="card-titulo">{evento.nome}</h3>
-            </div>
-          ))}
-        </div>
-      </section> */}
-
       <section className="numeros-section">
         <div className="numeros-grid colado">
           <div className="numero-item verde">
@@ -256,7 +235,25 @@ const Home = () => {
           </Link>
         </div>
       </section>
-
+      <section className="eventos-section">
+        <h2 className="eventos-titulo">Eventos Recentes</h2>
+        <div className="eventos-grid">
+          {eventos.map((evento) => (
+            <div
+              key={evento.id}
+              className="card-evento"
+              onClick={() => navigate(`/evento/${evento.id}`)}
+            >
+              <img
+                src={evento.imagemUrl}
+                alt={evento.nome}
+                className="card-img"
+              />
+              <h3 className="card-titulo">{evento.nome}</h3>
+            </div>
+          ))}
+        </div>
+      </section>
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"
@@ -270,4 +267,3 @@ const Home = () => {
 };
 
 export default Home;
-
