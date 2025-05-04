@@ -69,11 +69,6 @@ const ProjetoJudo = () => (
         <p>
           As aulas acontecem todos os finais de semana no centro comunitário.
           Contamos com professores voluntários que acompanham o desenvolvimento
-          das crianças, garantindo um ambiente seguro e acolhedor.
-        </p>
-        <p>
-          As aulas acontecem todos os finais de semana no centro comunitário.
-          Contamos com professores voluntários que acompanham o desenvolvimento
           das crianças, garantindo um ambiente seguro e acolhedor. As aulas
           acontecem todos os finais de semana no centro comunitário. Contamos
           com professores voluntários que acompanham o desenvolvimento das
