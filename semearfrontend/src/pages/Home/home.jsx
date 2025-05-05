@@ -1,9 +1,5 @@
 import React, { useEffect, useState } from "react";
 import {
-  FaMedal,
-  FaUserShield,
-  FaDumbbell,
-  FaUserCircle,
   FaWhatsapp,
   FaUsers,
   FaTrophy,
@@ -15,7 +11,6 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import criancaFoto from "../../assets/criança.foto.png";
-import logoSemear from "../../assets/logo.semear.png";
 import fotoequipe from "../../assets/fotoequipe.png";
 import judocriancas from "../../assets/judo.png";
 import idosos from "../../assets/idosos.png";
@@ -31,6 +26,8 @@ import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
 import Navbar from "../../components/Menu/Navbar";
 import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
 import { FaHandsHelping, FaBookOpen, FaBus, FaTshirt } from "react-icons/fa";
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -397,6 +394,35 @@ const Home = () => {
           </div>
         </div>
       </section>
+
+      <section className="contato-section">
+      <p className="subtitulo">EM CONTATO COM A SEMEANDO O FUTURO</p>
+      <h2 className="titulo">Entre em contato conosco e participe do nosso projeto</h2>
+
+      <div className="contato-boxes">
+        <div className="contato-item">
+          <FaMapMarkerAlt className="icon" />
+          <h3>Endereço</h3>
+          <p>74A High Road, Wanstead, London, E11 7RJ</p>
+        </div>
+
+        <div className="contato-item">
+          <FaPhoneAlt className="icon" />
+          <h3>Telefone</h3>
+          <p>078-4518-4100</p>
+        </div>
+
+        <div className="contato-item">
+          <FaEnvelope className="icon" />
+          <h3>E-mail</h3>
+          <p>info@teadoftherapydirectory.com</p>
+        </div>
+      </div>
+    </section>
+
+
+
+
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"

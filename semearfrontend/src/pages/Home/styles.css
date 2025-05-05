@@ -749,9 +749,8 @@
 }
 
 .doacao-section {
-  width: 90%;
   background-color: #f9f9f9;
-  padding: 50px 10px;
+  padding: 30px 10px;
 }
 
 .doacao-container {
@@ -845,4 +844,59 @@
 
 .botao-doacao:hover {
   background-color: #e67c30;
+}
+.contato-section {
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.subtitulo {
+  color: #81c04f;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.titulo {
+  font-size: 24px;
+  font-family: 'Abril Fatface', cursive;
+  color: #36405B;
+  margin-bottom: 40px;
+}
+
+.contato-boxes {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.contato-item {
+  border: 1px solid #e0e0e0;
+  padding: 20px;
+  width: 280px;
+  border-radius: 8px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.icon {
+  color: #81c04f;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+
+.contato-item h3 {
+  margin: 10px 0 5px;
+  font-weight: 600;
+  color: #1f2d3d;
+}
+
+.contato-item p {
+  color: #555;
+  font-size: 14px;
 }

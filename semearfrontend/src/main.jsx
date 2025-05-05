@@ -6,6 +6,9 @@ import Login from "./pages/Login/login";
 import Publicacao from "./pages/Publicacao/publicacao";
 import Judo from "./pages/Projetos/projetojudo";
 import Evento from './pages/Evento/evento'; 
+import TelaInicial from './pages/TelaInicial/telainicial'; 
+
+
 
 
 
@@ -19,7 +22,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/publicacao" element={<Publicacao />} />
         <Route path="/projeto-judo" element={<Judo />} />
         <Route path="/evento/:id" element={<Evento />} />
-
+        <Route path="/telainicial" element={<TelaInicial />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

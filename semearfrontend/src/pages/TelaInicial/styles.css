@@ -1,0 +1,108 @@
+.tela-inicial {
+    display: flex;
+    height: 100vh;
+    background-color: #f6fafd;
+  }
+  
+  .main-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  
+ 
+  
+  .titulo {
+    font-size: 24px;
+    font-weight: 700;
+    color: #041022;
+  }
+  
+  /* .banner-section {
+    background-color: transparent;
+    margin-bottom: 30px;
+  }
+  
+  .banner-card {
+    background-color: #81c04f;
+    color: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .online-course {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  
+  .banner-title {
+    font-size: 24px;
+    margin: 12px 0;
+  }
+  
+  .join-btn {
+    padding: 10px 20px;
+    background-color: white;
+    color: #81c04f;
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .eventos-section {
+    margin-top: 40px;
+  }
+  
+  .eventos-titulo {
+    font-size: 16px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  
+  .projetos-titulo {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .eventos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  
+  .card-evento {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  
+  .card-evento:hover {
+    transform: scale(1.02);
+  }
+  
+  .card-img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+  }
+  
+  .card-content {
+    padding: 10px 15px;
+  }
+  
+  .card-titulo {
+    font-size: 16px;
+    font-weight: 600;
+    color: #041022;
+  }
+  
+  .card-descricao {
+    font-size: 14px;
+    color: #555;
+    margin-top: 8px;
+  }
+   */
