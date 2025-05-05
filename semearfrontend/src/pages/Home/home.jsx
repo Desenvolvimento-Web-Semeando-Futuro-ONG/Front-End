@@ -260,11 +260,24 @@ const Home = () => {
               onClick={() => navigate(`/evento/${evento.id}`)}
             >
               <img
-                src={evento.imagemId ? `http://localhost:5189/api/galeria/${evento.imagemId}` : fotocard}
+                src={evento.imagemUrl ? `http://localhost:5189/api/galeria/${evento.imagemUrl}` : fotocard}
                 alt={evento.nome}
                 className="card-img"
+                onError={(e) => {
+                  e.target.src = fotocard;
+                  e.target.alt = "Imagem padrão do evento";
+                }}
               />
-              <h3 className="card-titulo">{evento.nome}</h3>
+              <div className="card-content">
+                <h3 className="card-titulo">{evento.nome}</h3>
+                {evento.descricao && (
+                  <p className="card-descricao">
+                    {evento.descricao.length > 100 
+                      ? `${evento.descricao.substring(0, 100)}...` 
+                      : evento.descricao}
+                  </p>
+                )}
+              </div>
             </div>
           ))}
         </div>
