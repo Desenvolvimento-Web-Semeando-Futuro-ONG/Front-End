@@ -26,13 +26,16 @@ import ProjetoCard from "../../components/ProjetoCard/ProjetoCard";
 import Navbar from "../../components/Menu/Navbar";
 import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
 import { FaHandsHelping, FaBookOpen, FaBus, FaTshirt } from "react-icons/fa";
-import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from 'react-icons/fa';
+import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
+import ChatBoot from "../../components/ChatBoot/chatboot";
+import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
   const navigate = useNavigate();
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [open, setOpen] = useState(false);
 
   const abrirFormulario = () => {
     setMostrarFormulario(true);
@@ -257,7 +260,11 @@ const Home = () => {
               onClick={() => navigate(`/evento/${evento.id}`)}
             >
               <img
-                src={evento.imagemUrl ? `http://localhost:5189/api/galeria/${evento.imagemUrl}` : fotocard}
+                src={
+                  evento.imagemUrl
+                    ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
+                    : fotocard
+                }
                 alt={evento.nome}
                 className="card-img"
                 onError={(e) => {
@@ -269,8 +276,8 @@ const Home = () => {
                 <h3 className="card-titulo">{evento.nome}</h3>
                 {evento.descricao && (
                   <p className="card-descricao">
-                    {evento.descricao.length > 100 
-                      ? `${evento.descricao.substring(0, 100)}...` 
+                    {evento.descricao.length > 100
+                      ? `${evento.descricao.substring(0, 100)}...`
                       : evento.descricao}
                   </p>
                 )}
@@ -396,33 +403,53 @@ const Home = () => {
       </section>
 
       <section className="contato-section">
-      <p className="subtitulo">EM CONTATO COM A SEMEANDO O FUTURO</p>
-      <h2 className="titulo">Entre em contato conosco e participe do nosso projeto</h2>
+        <p className="subtitulo">EM CONTATO COM A SEMEANDO O FUTURO</p>
+        <h2 className="titulo">
+          Entre em contato conosco e participe do nosso projeto
+        </h2>
 
-      <div className="contato-boxes">
-        <div className="contato-item">
-          <FaMapMarkerAlt className="icon" />
-          <h3>Endereço</h3>
-          <p>74A High Road, Wanstead, London, E11 7RJ</p>
+        <div className="contato-boxes">
+          <div className="contato-item">
+            <FaMapMarkerAlt className="icon" />
+            <h3>Endereço</h3>
+            <p>74A High Road, Wanstead, London, E11 7RJ</p>
+          </div>
+
+          <div className="contato-item">
+            <FaPhoneAlt className="icon" />
+            <h3>Telefone</h3>
+            <p>078-4518-4100</p>
+          </div>
+
+          <div className="contato-item">
+            <FaEnvelope className="icon" />
+            <h3>E-mail</h3>
+            <p>info@teadoftherapydirectory.com</p>
+          </div>
         </div>
-
-        <div className="contato-item">
-          <FaPhoneAlt className="icon" />
-          <h3>Telefone</h3>
-          <p>078-4518-4100</p>
-        </div>
-
-        <div className="contato-item">
-          <FaEnvelope className="icon" />
-          <h3>E-mail</h3>
-          <p>info@teadoftherapydirectory.com</p>
+      </section>
+      <section className="chatboot-section">
+        <ChatBoot />
+      </section>
+      <footer className="site-footer">
+      <div className="footer-content">
+        <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
+        <div className="social-icons">
+          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <FaInstagram />
+          </a>
+          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <FaFacebookF />
+          </a>
+          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <FaLinkedinIn />
+          </a>
+          <a href="mailto:contato@seudominio.com" aria-label="E-mail">
+            <FaEnvelope />
+          </a>
         </div>
       </div>
-    </section>
-
-
-
-
+    </footer>
       <a
         href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="whatsapp-icon"
