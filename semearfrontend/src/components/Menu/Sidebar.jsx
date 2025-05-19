@@ -9,7 +9,7 @@ const Sidebar = () => {
   const location = useLocation();
 
   const menuItems = [
-    { name: 'Home', icon: <FiHome />, path: '/home' },
+    { name: 'Home', icon: <FiHome />, path: '/telainicial' },
     { name: 'Voluntários', icon: <FiUsers />, path: '/voluntarios' },
   ];
 

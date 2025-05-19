@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import "./styles.css";
+import "./styles.css"; 
 import imagemCrianca from "../../assets/loginfundo.png";
 import axios from "axios";
-import { useNavigate } from "react-router-dom"; 
+import { useNavigate } from "react-router-dom";
 
+const Login = () => {
+  const navigate = useNavigate();
 
-const Login = () => { 
-  const navigate = useNavigate(); 
-
-  const [login, setLogin] = useState("");  
+  const [login, setLogin] = useState("");
   const [senha, setSenha] = useState("");
   const [captchaValue, setCaptchaValue] = useState(null);
   const [modoRecuperarSenha, setModoRecuperarSenha] = useState(false);
@@ -35,9 +34,7 @@ const Login = () => {
 
       console.log("Token recebido:", response.data.token);
       localStorage.setItem("token", response.data.token);
-
-      navigate("/publicacao"); 
-
+      navigate("/telainicial");
     } catch (error) {
       console.error("Erro ao fazer login:", error);
       alert("Falha ao fazer login. Verifique seus dados.");
@@ -49,7 +46,7 @@ const Login = () => {
 
     try {
       const response = await axios.post("http://localhost:5238/api/forgot-password", {
-        email: login, 
+        email: login,
       });
 
       if (response.data.sucesso) {
@@ -69,8 +66,13 @@ const Login = () => {
       <div className="login-left">
         <img src={imagemCrianca} alt="Criança feliz" className="imagem-fundo" />
         <div className="texto-overlay">
-          <h2>Junte-se a nós<br /> <strong>e faça a diferença</strong></h2>
-          <p>Junte-se a nós, e nos ajude a continuar com esse projeto impactante</p>
+          <h2>
+            Junte-se a nós
+            <br /> <strong>e faça a diferença</strong>
+          </h2>
+          <p>
+            Junte-se a nós, e nos ajude a continuar com esse projeto impactante
+          </p>
         </div>
       </div>
 
@@ -78,56 +80,74 @@ const Login = () => {
         <div className="login-box">
           <h3>Bem-vindo à</h3>
           <h1 className="titulo-logo">
-            <span>Semeando o</span><br /> <span className="azull">Futuro</span>
+            <span>Semeando o</span>
+            <br /> <span className="azull">Futuro</span>
           </h1>
 
           {modoRecuperarSenha ? (
-            <form onSubmit={handleSubmitRecuperar}>
+            <form name="form-recuperar-senha" className="form-login" onSubmit={handleSubmitRecuperar}>
               <label>Login (Email)</label>
-              <input 
-                type="text" 
-                value={login} 
-                onChange={(e) => setLogin(e.target.value)} 
-                required 
+              <input
+                type="text"
+                name="email"
+                className="input-login"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+                required
               />
 
-              <button type="submit" className="login-buttonn">Recuperar Senha</button>
+              <button type="submit" className="login-buttonn">
+                Recuperar Senha
+              </button>
 
               <p className="register-text">
-                Lembrou sua senha? <a href="#" onClick={() => setModoRecuperarSenha(false)}>Voltar para Login</a>
+                Lembrou sua senha?{" "}
+                <a href="#" onClick={() => setModoRecuperarSenha(false)}>
+                  Voltar para Login
+                </a>
               </p>
             </form>
           ) : (
-            <form onSubmit={handleSubmit}>
+            <form name="form-login" className="form-login" onSubmit={handleSubmit}>
               <label>Login</label>
-              <input 
-                type="text" 
-                value={login} 
-                onChange={(e) => setLogin(e.target.value)} 
-                required 
+              <input
+                type="text"
+                name="login"
+                className="input-login"
+                value={login}
+                onChange={(e) => setLogin(e.target.value)}
+                required
               />
 
               <label>Senha</label>
-              <input 
-                type="password" 
-                value={senha} 
-                onChange={(e) => setSenha(e.target.value)} 
-                required 
+              <input
+                type="password"
+                name="senha"
+                className="input-login"
+                value={senha}
+                onChange={(e) => setSenha(e.target.value)}
+                required
               />
 
               <div className="options">
-                <label><input type="checkbox" /> Lembrar de mim</label>
-                <a href="#" onClick={() => setModoRecuperarSenha(true)}>Esqueceu a senha?</a>
+                <label>
+                  <input type="checkbox" /> Lembrar de mim
+                </label>
+                <a href="#" onClick={() => setModoRecuperarSenha(true)}>
+                  Esqueceu a senha?
+                </a>
               </div>
 
               <div className="captcha-container">
                 <ReCAPTCHA
-                  sitekey="6Ld7viUrAAAAADaqvNmFbmk2414HsQo753cx73bU" 
+                  sitekey="6Ld7viUrAAAAADaqvNmFbmk2414HsQo753cx73bU"
                   onChange={handleCaptchaChange}
                 />
               </div>
 
-              <button type="submit" className="login-buttonn">Login</button>
+              <button type="submit" className="login-buttonn">
+                Login
+              </button>
             </form>
           )}
         </div>

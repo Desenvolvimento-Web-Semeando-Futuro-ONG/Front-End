@@ -23,7 +23,6 @@ function Evento() {
         const data = await response.json();
         console.log("Dados do evento:", data);
         
-        // Transforma a imagemUrl em URL completa se necessário
         const eventoComImagem = {
           ...data,
           imagemUrl: data.imagemUrl 

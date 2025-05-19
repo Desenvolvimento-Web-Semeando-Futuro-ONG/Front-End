@@ -246,7 +246,6 @@ const Home = () => {
           </Link>
         </div>
       </section>
-
       <section className="eventos-section">
         <h4 className="eventos-titulo">
           Eventos especiais da ONG Semeando o Futuro
