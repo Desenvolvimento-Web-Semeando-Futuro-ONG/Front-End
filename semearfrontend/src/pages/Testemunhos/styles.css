@@ -3,13 +3,14 @@
     padding: 100px 20px;
   }
   
-  .titulo-testemunhos {
-    color: #40b7dd;
-    font-weight: 750;
-    font-size: 4rem;
-    margin-bottom: 40px;
-  }
-  
+.titulo-testemunhos {
+  color: #40b7dd;
+  font-weight: 700;
+  font-size: 4rem;
+  margin-bottom: 40px;
+  font-family: "Montserrat", sans-serif;
+}
+
   .meu-swiper {
     max-width: 800px;
     margin: 0 auto;

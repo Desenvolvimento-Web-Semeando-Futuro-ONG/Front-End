@@ -96,3 +96,28 @@
   margin-left: 20px;
   margin-bottom: 5px;
 }
+
+.navbar .login-button::after {
+  content: none;
+}
+
+.login-button {
+  background-color: #81c04f;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+}
+
+.login-button:hover {
+  background-color: #6cab45; /* opcional: efeito hover */
+}
+
+.login-button .login-icon-white {
+  color: white;
+}

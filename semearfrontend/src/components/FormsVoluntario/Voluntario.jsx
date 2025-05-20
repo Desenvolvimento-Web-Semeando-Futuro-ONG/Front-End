@@ -1,19 +1,23 @@
+
 import React, { useState, useEffect } from "react";
 import "./styles.css";
-import bannerImage from "../../assets/bannervoluntarios.jpg"; 
+import bannerImage from "../../assets/bannervoluntarios.jpg";
+import { useNavigate } from "react-router-dom";
 
 const FormsVoluntario = ({ fecharFormulario }) => {
   const [nome, setNome] = useState("");
   const [telefone, setTelefone] = useState("");
   const [cpf, setCpf] = useState("");
   const [email, setEmail] = useState("");
-  const [projetos, setProjetos] = useState("");
-  const [habilidades, setHabilidades] = useState(""); 
+  const [projetoId, setProjetoId] = useState("");
+  const [habilidades, setHabilidades] = useState("");
   const [disponibilidade, setDisponibilidade] = useState("");
   const [concorda, setConcorda] = useState(false);
   const [mensagem, setMensagem] = useState("");
   const [opcoesProjetos, setOpcoesProjetos] = useState([]);
   const [mostrarModalSucesso, setMostrarModalSucesso] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch("http://localhost:5189/api/Projeto/ativos")
@@ -26,17 +30,17 @@ const FormsVoluntario = ({ fecharFormulario }) => {
     e.preventDefault();
 
     const voluntario = {
+      projetoId: parseInt(projetoId),
       nome,
       telefone,
       cpf,
       email,
-      habilidades, 
+      habilidades,
       disponibilidade,
-      projetos,
     };
 
     try {
-      const response = await fetch("http://localhost:5189/api/Voluntario", {
+      const response = await fetch("http://localhost:5189/api/Projeto/inscrever", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(voluntario),
@@ -48,8 +52,8 @@ const FormsVoluntario = ({ fecharFormulario }) => {
         setTelefone("");
         setCpf("");
         setEmail("");
-        setProjetos("");
-        setHabilidades(""); 
+        setProjetoId("");
+        setHabilidades("");
         setDisponibilidade("");
         setConcorda(false);
         setMensagem("");
@@ -60,6 +64,11 @@ const FormsVoluntario = ({ fecharFormulario }) => {
       console.error("Erro:", error);
       setMensagem("Erro de conexão. Tente novamente mais tarde.");
     }
+  };
+
+  const handleOk = () => {
+    setMostrarModalSucesso(false);
+    navigate("/"); 
   };
 
   return (
@@ -76,9 +85,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
         </div>
 
         <div className="formulario-voluntario-conteudo">
-          <h3 className="formulario-voluntario-titulo">
-            Formulário Voluntário
-          </h3>
+          <h3 className="formulario-voluntario-titulo">Formulário Voluntário</h3>
 
           <form className="formulario-voluntario-form" onSubmit={handleSubmit}>
             <input
@@ -111,23 +118,22 @@ const FormsVoluntario = ({ fecharFormulario }) => {
             />
 
             <select
-              value={projetos}
-              onChange={(e) => setProjetos(e.target.value)}
+              value={projetoId}
+              onChange={(e) => setProjetoId(e.target.value)}
               required
             >
               <option value="">Selecione um projeto</option>
               {opcoesProjetos.map((p) => (
-                <option key={p.id} value={p.nome}>
+                <option key={p.id} value={p.id}>
                   {p.nome}
                 </option>
               ))}
             </select>
 
             <textarea
-              type="text"
               placeholder="Habilidades (ex: Comunicação, Liderança)"
               value={habilidades}
-              onChange={(e) => setHabilidades(e.target.value)} 
+              onChange={(e) => setHabilidades(e.target.value)}
               required
               style={{ gridColumn: "span 2" }}
             />
@@ -138,7 +144,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
               onChange={(e) => setDisponibilidade(e.target.value)}
             />
 
-            <div className="formulario-voluntario-privacidade">
+            <div className="form-checkbox">
               <label>
                 <input
                   type="checkbox"
@@ -148,12 +154,14 @@ const FormsVoluntario = ({ fecharFormulario }) => {
                 />
                 Concordo com os termos de privacidade
               </label>
+              <p className="form-privacidade-info">
+                Ao fornecer suas informações, você confirma que concorda com nossos
+                requisitos e autoriza o uso deles conforme nossa política de
+                privacidade.
+              </p>
             </div>
 
-            <button
-              type="submit"
-              className="formulario-voluntario-botao-enviar"
-            >
+            <button type="submit" className="form-button">
               Enviar
             </button>
           </form>
@@ -167,14 +175,11 @@ const FormsVoluntario = ({ fecharFormulario }) => {
       {mostrarModalSucesso && (
         <div className="modal-sucesso-overlay">
           <div className="modal-sucesso">
-            <button
-              className="modal-fechar"
-              onClick={() => setMostrarModalSucesso(false)}
-            >
-              ✖
-            </button>
             <h2>Cadastro realizado com sucesso!</h2>
             <p>Entraremos em contato.</p>
+            <button className="form-button" onClick={handleOk}>
+              OK
+            </button>
           </div>
         </div>
       )}

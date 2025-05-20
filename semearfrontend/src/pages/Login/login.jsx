@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import ReCAPTCHA from "react-google-recaptcha";
-import "./styles.css"; 
+import "./styles.css";
 import imagemCrianca from "../../assets/loginfundo.png";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.semear.png";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -26,11 +27,14 @@ const Login = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5189/api/Auth/login", {
-        login: login,
-        senha: senha,
-        captchaToken: captchaValue,
-      });
+      const response = await axios.post(
+        "http://localhost:5189/api/Auth/login",
+        {
+          login: login,
+          senha: senha,
+          captchaToken: captchaValue,
+        }
+      );
 
       console.log("Token recebido:", response.data.token);
       localStorage.setItem("token", response.data.token);
@@ -45,9 +49,12 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:5238/api/forgot-password", {
-        email: login,
-      });
+      const response = await axios.post(
+        "http://localhost:5238/api/forgot-password",
+        {
+          email: login,
+        }
+      );
 
       if (response.data.sucesso) {
         alert("Email enviado! Verifique sua caixa de entrada.");
@@ -80,12 +87,21 @@ const Login = () => {
         <div className="login-box">
           <h3>Bem-vindo à</h3>
           <h1 className="titulo-logo">
-            <span>Semeando o</span>
-            <br /> <span className="azull">Futuro</span>
+            <span>Semeando</span>
+            <img
+              src={logo}
+              alt="Logo Semeando o Futuro"
+              className="logo-no-titulo"
+            />
+            <span className="azull">Futuro</span>
           </h1>
 
           {modoRecuperarSenha ? (
-            <form name="form-recuperar-senha" className="form-login" onSubmit={handleSubmitRecuperar}>
+            <form
+              name="form-recuperar-senha"
+              className="form-login"
+              onSubmit={handleSubmitRecuperar}
+            >
               <label>Login (Email)</label>
               <input
                 type="text"
@@ -108,7 +124,11 @@ const Login = () => {
               </p>
             </form>
           ) : (
-            <form name="form-login" className="form-login" onSubmit={handleSubmit}>
+            <form
+              name="form-login"
+              className="form-login"
+              onSubmit={handleSubmit}
+            >
               <label>Login</label>
               <input
                 type="text"
@@ -157,4 +177,3 @@ const Login = () => {
 };
 
 export default Login;
-

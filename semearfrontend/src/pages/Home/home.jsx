@@ -57,7 +57,7 @@ const Home = () => {
       <div className="home-container">
         <Navbar />
       </div>
-      <section className="hero-section">
+      <section id="home" className="hero-section">
         <div className="hero-content">
           <span className="subtitle">ONG - Semeando o Futuro</span>
           <h1>
@@ -131,7 +131,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="sobre-section">
+      <section id="sobre" className="sobre-section">
         <div className="sobre-content">
           <div className="sobre-texto">
             <h2>
@@ -204,7 +204,7 @@ const Home = () => {
         </div>
         <Testemunhos />
       </section>
-      <section className="projetos-section">
+      <section id="projetos" className="projetos-section">
         <div className="projetos-header">
           <h4 className="projetos-subtitulo">
             CONHEÇA UM POUCO DOS NOSSOS PROJETOS
@@ -220,7 +220,6 @@ const Home = () => {
               imagem={judocriancas}
             />
           </Link>
-
           <Link to="/projetos/recreativa">
             <ProjetoCard
               titulo="Atividades Recreativas"
@@ -228,7 +227,6 @@ const Home = () => {
               imagem={recreativa}
             />
           </Link>
-
           <Link to="/projetos/idosos">
             <ProjetoCard
               titulo="Atividades com Idosos"
@@ -236,7 +234,6 @@ const Home = () => {
               imagem={idosos}
             />
           </Link>
-
           <Link to="/projetos/eventos">
             <ProjetoCard
               titulo="Organização de Eventos"
@@ -246,7 +243,7 @@ const Home = () => {
           </Link>
         </div>
       </section>
-      <section className="eventos-section">
+      <section id="eventos" className="eventos-section">
         <h4 className="eventos-titulo">
           Eventos especiais da ONG Semeando o Futuro
         </h4>
@@ -285,7 +282,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
       <section className="banner-voluntario">
         <div className="conteudo-banner">
           <h2>Seja voluntário da nossa ONG</h2>
@@ -302,7 +298,6 @@ const Home = () => {
         <h2>
           Pessoas Que Fazem <br />A Diferença na Semeando
         </h2>
-
         <div className="pessoas-grid">
           <div className="pessoa-card">
             <img src={idosa} className="pessoa-img" />
@@ -313,7 +308,6 @@ const Home = () => {
               </p>
             </div>
           </div>
-
           <div className="pessoa-card">
             <img src={estudantes} className="pessoa-img" />
             <div className="pessoa-info laranja">
@@ -324,7 +318,6 @@ const Home = () => {
               </p>
             </div>
           </div>
-
           <div className="pessoa-card">
             <img src={criancasevento} className="pessoa-img" />
             <div className="pessoa-info verde">
@@ -335,7 +328,6 @@ const Home = () => {
               </p>
             </div>
           </div>
-
           <div className="pessoa-card">
             <img src={criancascozinha} className="pessoa-img" />
             <div className="pessoa-info laranja">
@@ -348,7 +340,6 @@ const Home = () => {
           </div>
         </div>
       </section>
-
       <section className="doacao-section">
         <div className="doacao-container">
           <div className="doacao-texto">
@@ -386,7 +377,6 @@ const Home = () => {
               </div>
             </div>
           </div>
-
           <div className="doacao-imagem">
             <div className="overlay">
               <h3>
@@ -401,7 +391,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="contato-section">
+      <section id="contato" className="contato-section">
         <p className="subtitulo">EM CONTATO COM A SEMEANDO O FUTURO</p>
         <h2 className="titulo">
           Entre em contato conosco e participe do nosso projeto
@@ -411,19 +401,19 @@ const Home = () => {
           <div className="contato-item">
             <FaMapMarkerAlt className="icon" />
             <h3>Endereço</h3>
-            <p>74A High Road, Wanstead, London, E11 7RJ</p>
+            <p>Recife, Pernambuco</p>
           </div>
 
           <div className="contato-item">
             <FaPhoneAlt className="icon" />
             <h3>Telefone</h3>
-            <p>078-4518-4100</p>
+            <p>(81)98843-0469</p>
           </div>
 
           <div className="contato-item">
             <FaEnvelope className="icon" />
             <h3>E-mail</h3>
-            <p>info@teadoftherapydirectory.com</p>
+            <p>ongsemeandofuturo.com.br</p>
           </div>
         </div>
       </section>

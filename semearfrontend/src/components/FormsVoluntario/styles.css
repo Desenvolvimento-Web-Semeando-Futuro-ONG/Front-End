@@ -15,13 +15,16 @@
 
 .formulario-voluntario-container {
   background: #fff;
-  border-radius: 12px;
+  border-radius: 16px;
   width: 100%;
   max-width: 600px;
   overflow: hidden;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   animation: slideUp 0.4s ease-in-out;
   position: relative;
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .formulario-voluntario-banner {
@@ -36,25 +39,28 @@
 
 .formulario-voluntario-fechar {
   position: absolute;
-  top: 10px;
-  right: 15px;
+  top: 12px;
+  right: 16px;
   background: none;
   border: none;
-  font-size: 22px;
+  font-size: 24px;
   cursor: pointer;
   color: #fff;
   z-index: 10;
 }
 
 .formulario-voluntario-conteudo {
-  padding: 25px;
+  padding: 20px 25px;
+  overflow-y: auto;
 }
 
 .formulario-voluntario-titulo {
-  font-size: 24px;
+  font-size: 2rem;
   margin-bottom: 20px;
-  color: #333;
+  color: #092c4c;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
 }
 
 .formulario-voluntario-form {
@@ -64,96 +70,95 @@
 }
 
 .formulario-voluntario-form input,
-.formulario-voluntario-form select {
+.formulario-voluntario-form select,
+.formulario-voluntario-form textarea {
   width: 100%;
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
+  border-radius: 10px;
+  border: 1px solid #d4d4d4;
   font-size: 15px;
   box-sizing: border-box;
-  transition: border-color 0.3s ease;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  color: #333;
+  background-color: #fafafa;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* Aumentar a largura do select de "Selecione um projeto" */
+.formulario-voluntario-form input:focus,
+.formulario-voluntario-form select:focus,
+.formulario-voluntario-form textarea:focus {
+  border-color: #4cc9f0;
+  box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+  outline: none;
+}
+
 .formulario-voluntario-form select {
-  width: 100%;
-  max-width: 500px; /* Aumentei a largura para 500px */
+  grid-column: span 2;
 }
 
 .formulario-voluntario-form textarea {
-  grid-column: span 2;
   resize: vertical;
-  min-height: 40px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 15px;
+  min-height: 60px;
+  grid-column: span 2;
 }
 
-.formulario-voluntario-habilidades-container {
+.form-checkbox {
   grid-column: span 2;
+  font-size: 16px;
+  color: #d0e8f3;
+  background-color: #4cc9f0;
+  padding: 16px;
+  border: 1px solid #d0e8f3;
+  border-radius: 10px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 12px;
 }
 
-.formulario-voluntario-habilidades-container > label {
-  font-weight: 600;
-  margin-bottom: 4px;
-}
-
-.formulario-voluntario-habilidade-opcoes {
+.form-checkbox label {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
   gap: 10px;
+  font-weight: 500;
+  color: white;
+  font-size: 16px;
+  line-height: 1.4;
+}
+  
+.form-checkbox input[type="checkbox"] {
+  accent-color: #4cc9f0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
 }
 
-.formulario-voluntario-habilidade-option {
-  display: flex;
-  align-items: center;
+.form-privacidade-info {
   font-size: 14px;
-  gap: 5px;
+  color: white;
+  line-height: 1.5;
+  margin: 0;
+  text-align: justify;
 }
 
-/* Melhorar o alinhamento do "Concordo com os termos" */
-.formulario-voluntario-privacidade {
-  grid-column: span 2;
-  font-size: 14px;
-  color: #555;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 10px;
-  justify-content: center; /* Centraliza o checkbox e texto */
-}
 
-.formulario-voluntario-privacidade input {
-  margin-right: 8px;
-}
-
-.formulario-voluntario-botao-enviar {
+.form-button {
   grid-column: span 2;
   background-color: #4cc9f0;
   color: white;
-  padding: 12px;
+  padding: 13px;
   border: none;
-  border-radius: 8px;
-  font-size: 15px;
+  border-radius: 10px;
+  font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 50%; /* Largura reduzida para 50% */
-  margin: 20px auto; /* Centraliza o botão com um espaçamento adequado */
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  width: 50%;
+  margin: 20px auto 0;
+  display: block;
 }
 
-.formulario-voluntario-botao-enviar:hover {
+.form-button:hover {
   background-color: #3b94d9;
-}
-
-/* Adicionando hover nos inputs */
-.formulario-voluntario-form input:hover,
-.formulario-voluntario-form select:hover,
-.formulario-voluntario-form textarea:hover {
-  border-color: #28a745; /* Borda verde */
+  transform: translateY(-1px);
 }
 
 .modal-sucesso-overlay {
@@ -162,7 +167,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0,0,0,0.6);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -171,16 +176,21 @@
 
 .modal-sucesso {
   background: #fff;
-  padding: 30px 40px;
-  border-radius: 12px;
+  padding: 35px 40px;
+  border-radius: 16px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.25);
   position: relative;
+  max-width: 400px;
+  width: 90%;
+  animation: slideUp 0.3s ease-out;
 }
 
 .modal-sucesso h2 {
   color: #28a745;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+  font-size: 22px;
+  font-weight: 600;
 }
 
 .modal-sucesso p {
@@ -191,10 +201,10 @@
 .modal-fechar {
   position: absolute;
   top: 10px;
-  right: 12px;
+  right: 14px;
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   color: #ff3b30;
 }
@@ -209,3 +219,4 @@
     opacity: 1;
   }
 }
+

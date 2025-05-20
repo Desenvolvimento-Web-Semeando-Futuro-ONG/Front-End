@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { FaUserCircle } from 'react-icons/fa';
-import logoSemear from '../../assets/logo.semear.png' 
+import React from "react";
+import { Link } from "react-router-dom";
+import { FaUserCircle } from "react-icons/fa";
+import logoSemear from "../../assets/logo.semear.png";
 
 const Navbar = () => {
   return (
@@ -11,19 +11,30 @@ const Navbar = () => {
       </div>
       <nav>
         <ul>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/projetos">Projetos</Link></li>
-          <li><Link to="/eventos">Eventos</Link></li>
-          <li><Link to="/sobre">Sobre</Link></li>
-          <li><Link to="/doacoes">Doações</Link></li>
-          <li><Link to="/contato">Contato</Link></li>
+          <li>
+            <Link to="#home">Home</Link>
+          </li>
+          <li>
+            <Link to="#projetos">Projetos</Link>
+          </li>
+          <li>
+            <Link to="#eventos">Eventos</Link>
+          </li>
+          <li>
+            <a href="#sobre">Sobre</a>  
+          </li>
+          <li>
+            <Link to="/doacoes">Doações</Link>
+          </li>
+          <li>
+            <Link to="#contato">Contato</Link>
+          </li>
         </ul>
       </nav>
       <div className="login-icon">
-        <Link to="/login">
-          <button className="login-button">
-            <FaUserCircle size={20} /> Login
-          </button>
+        <Link to="/login" className="login-button">
+          <FaUserCircle size={20} className="login-icon-white" />
+          Login
         </Link>
       </div>
     </header>
