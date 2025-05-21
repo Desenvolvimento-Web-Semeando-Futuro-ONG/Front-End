@@ -1,196 +1,192 @@
-// import { useEffect, useState } from "react";
-// import { useNavigate } from "react-router-dom";
-// import Sidebar from "../../components/Menu/Sidebar";
-
-// import "./styles.css";
-// import fotocard from "../../assets/fotocard.png";
-// import Header from "../../components/Header/header";
-
-// const TelaInicial = () => {
-//   const [eventos, setEventos] = useState([]);
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     fetch("http://localhost:5189/api/eventos")
-//       .then((res) => res.json())
-//       .then((data) => setEventos(data))
-//       .catch((err) => console.error("Erro ao buscar eventos:", err));
-//   }, []);
-
-//   return (
-//     <div className="tela-inicial">
-//       <Sidebar />
-
-//       <div className="main-content">
-//         <Header />
-
-//         <div className="conteudo">
-//           <section className="banner-section">
-//             <div className="banner-card">
-//               <p className="online-course">ONLINE COURSE</p>
-//               <h2 className="banner-title">
-//                 Sharpen Your Skills With <br /> Professional Online Courses
-//               </h2>
-//               <button className="join-btn">Join Now</button>
-//             </div>
-//           </section>
-
-//           {/* Sessão para cards ainda não implementada */}
-//           {/* <section className="drafts-section">
-//             <h2>Continue Escrevendo</h2>
-//             ...
-//           </section> */}
-
-//           <section className="eventos-section">
-//             <div className="eventos-grid">
-//               {eventos.map((evento) => (
-//                 <div
-//                   key={evento.id}
-//                   className="card-evento"
-//                   onClick={() => navigate(`/evento/${evento.id}`)}
-//                 >
-//                   <img
-//                     src={
-//                       evento.imagemUrl
-//                         ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
-//                         : fotocard
-//                     }
-//                     alt={evento.nome}
-//                     className="card-img"
-//                     onError={(e) => {
-//                       e.target.src = fotocard;
-//                       e.target.alt = "Imagem padrão do evento";
-//                     }}
-//                   />
-//                   <div className="card-content">
-//                     <h3 className="card-titulo">{evento.nome}</h3>
-//                     {evento.descricao && (
-//                       <p className="card-descricao">
-//                         {evento.descricao.length > 100
-//                           ? `${evento.descricao.substring(0, 100)}...`
-//                           : evento.descricao}
-//                       </p>
-//                     )}
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </section>
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default TelaInicial;
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Sidebar from "../../components/Menu/Sidebar";
 import Header from "../../components/Header/header";
 import "./styles.css";
 import fotocard from "../../assets/fotocard.png";
+import { FiEdit, FiTrash2, FiEye } from "react-icons/fi";
 
 const TelaInicial = () => {
-  const [eventos, setEventos] = useState([]);
+  const [rascunhos, setRascunhos] = useState([]);
+  const [publicados, setPublicados] = useState([]);
+  const [modalAberto, setModalAberto] = useState(false);
+  const [eventoParaDeletar, setEventoParaDeletar] = useState(null);
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:5189/api/eventos")
-      .then((res) => res.json())
-      .then((data) => setEventos(data))
-      .catch((err) => console.error("Erro ao buscar eventos:", err));
-  }, []);
+    fetch("http://localhost:5189/api/Evento/rascunhos", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao buscar rascunhos");
+        return res.json();
+      })
+      .then(setRascunhos)
+      .catch((err) => {
+        console.error("Erro ao buscar rascunhos:", err);
+        setRascunhos([]);
+      });
+
+    fetch("http://localhost:5189/api/Evento/publicados")
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao buscar publicados");
+        return res.json();
+      })
+      .then(setPublicados)
+      .catch((err) => {
+        console.error("Erro ao buscar publicados:", err);
+        setPublicados([]);
+      });
+  }, [token]);
+
+  const abrirModalDeletar = (evento) => {
+    setEventoParaDeletar(evento);
+    setModalAberto(true);
+  };
+
+  const fecharModal = () => {
+    setEventoParaDeletar(null);
+    setModalAberto(false);
+  };
+
+  const confirmarDeletar = () => {
+    if (!eventoParaDeletar) return;
+
+    const headers = eventoParaDeletar.publicado
+      ? {}
+      : { Authorization: `Bearer ${token}` };
+
+    fetch(`http://localhost:5189/api/Evento/${eventoParaDeletar.id}`, {
+      method: "DELETE",
+      headers,
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Erro ao deletar");
+        setRascunhos((prev) => prev.filter((e) => e.id !== eventoParaDeletar.id));
+        setPublicados((prev) => prev.filter((e) => e.id !== eventoParaDeletar.id));
+        fecharModal();
+      })
+      .catch((err) => {
+        console.error("Erro ao deletar evento:", err);
+        fecharModal();
+      });
+  };
+
+ const editarEvento = (evento) => {
+  navigate("/publicacao", { state: { eventoId: evento.id } });
+};
+
+
+  const CardEvento = ({ evento, isRascunho }) => (
+    <div className="card-publicacao">
+      <div className="card-header">
+        <img
+          src={
+            evento.imagemUrl
+              ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
+              : fotocard
+          }
+          alt={evento.nome}
+          onError={(e) => {
+            e.target.src = fotocard;
+          }}
+        />
+      </div>
+      <div className="card-conteudo">
+        <span className={`card-status ${isRascunho ? "status-rascunho" : "status-publicado"}`}>
+          {isRascunho ? "Escrevendo" : "Publicado"}
+        </span>
+        <div className="card-tituloo">{evento.nome}</div>
+        <div className={`card-progresso ${isRascunho ? "rascunho" : "publicado"}`}>
+          <div className="barra"></div>
+        </div>
+        <div className="card-icones">
+          {isRascunho ? (
+            <button onClick={() => editarEvento(evento)} title="Editar">
+              <FiEdit />
+            </button>
+          ) : (
+            <button onClick={() => navigate(`/evento/${evento.id}`)} title="Visualizar">
+              <FiEye />
+            </button>
+          )}
+          <button onClick={() => abrirModalDeletar({ ...evento, publicado: !isRascunho })} title="Excluir">
+            <FiTrash2 />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="tela-inicial">
       <Sidebar />
-
       <div className="main-content">
         <Header />
-
         <div className="content">
           <section className="banner-projeto">
             <div className="texto-banner">
-              <span className="bem-vindo">ONLINE COURSE</span>
+              <span className="bem-vindo">Seja bem-vindo!</span>
               <h2>
-                Sharpen Your Skills With <br /> Professional Online Courses
+                Agradecemos por apoiar nossa missão. <br />
+                Vamos transformar vidas juntos.
               </h2>
-              <button className="botao-banner">Join Now</button>
+              <button className="botao-banner">Conheça mais</button>
             </div>
           </section>
 
           <section className="secao-eventos">
             <h3 className="titulo-secao">Continue Escrevendo</h3>
-            <div className="eventos-grid">
-              {eventos
-                .filter((evento) => evento.publicado === false)
-                .map((evento) => (
-                  <div
-                    key={evento.id}
-                    className="card-evento"
-                    onClick={() => navigate(`/evento/${evento.id}`)}
-                  >
-                    <img
-                      src={
-                        evento.imagemUrl
-                          ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
-                          : fotocard
-                      }
-                      alt={evento.nome}
-                      className="card-img"
-                      onError={(e) => {
-                        e.target.src = fotocard;
-                        e.target.alt = "Imagem padrão do evento";
-                      }}
-                    />
-                    <div className="card-content">
-                      <h3 className="card-titulo">{evento.nome}</h3>
-                      {evento.descricao && (
-                        <p className="card-descricao">
-                          {evento.descricao.length > 100
-                            ? `${evento.descricao.substring(0, 100)}...`
-                            : evento.descricao}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                ))}
+            <div className="grid-eventos">
+              {rascunhos.length > 0 ? (
+                rascunhos.map((evento) => (
+                  <CardEvento key={evento.id} evento={evento} isRascunho={true} />
+                ))
+              ) : (
+                <p>Nenhum rascunho encontrado.</p>
+              )}
             </div>
           </section>
 
           <section className="secao-eventos">
             <h3 className="titulo-secao">Publicações Recentes No Site</h3>
             <div className="grid-eventos">
-              {eventos.map((evento) => (
-                <div
-                  key={evento.id}
-                  className="card-evento"
-                  onClick={() => navigate(`/evento/${evento.id}`)}
-                >
-                  <img
-                    src={
-                      evento.imagemUrl
-                        ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
-                        : fotocard
-                    }
-                    alt={evento.nome}
-                    className="img-evento"
-                    onError={(e) => {
-                      e.target.src = fotocard;
-                    }}
-                  />
-                  <div className="info-evento">
-                    <h3>{evento.nome}</h3>
-                  </div>
-                </div>
-              ))}
+              {publicados.length > 0 ? (
+                publicados.map((evento) => (
+                  <CardEvento key={evento.id} evento={evento} isRascunho={false} />
+                ))
+              ) : (
+                <p>Nenhuma publicação encontrada.</p>
+              )}
             </div>
           </section>
         </div>
       </div>
+
+      {modalAberto && (
+        <div className="modal-overlay">
+          <div className="modal-content">
+            <h2>Confirmar exclusão</h2>
+            <p>
+              Tem certeza que deseja deletar a publicação <strong>{eventoParaDeletar.nome}</strong>?
+            </p>
+            <div className="modal-buttons">
+              <button className="btn-cancelar" onClick={fecharModal}>
+                Cancelar
+              </button>
+              <button className="btn-confirmar" onClick={confirmarDeletar}>
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
 
 export default TelaInicial;
+

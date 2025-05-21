@@ -153,8 +153,6 @@ const VoluntarioList = () => {
               ))}
             </tbody>
           </table>
-
-          {/* Paginação */}
           <div className="paginacao">
             <button
               onClick={() => mudarPagina(paginaAtual - 1)}
@@ -178,8 +176,6 @@ const VoluntarioList = () => {
               Próxima
             </button>
           </div>
-
-          {/* Modal */}
           {modalVoluntario && (
             <div className="modal-overlay">
               <div className="modal">

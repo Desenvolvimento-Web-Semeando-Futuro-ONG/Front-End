@@ -46,7 +46,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5189/api/Evento")
+    fetch("http://localhost:5189/api/Evento/publicados")
       .then((res) => res.json())
       .then((data) => setEventos(data))
       .catch((err) => console.error("Erro ao buscar eventos:", err));

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import bannerImage from "../../assets/bannervoluntarios.jpg";
@@ -40,11 +39,14 @@ const FormsVoluntario = ({ fecharFormulario }) => {
     };
 
     try {
-      const response = await fetch("http://localhost:5189/api/Projeto/inscrever", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(voluntario),
-      });
+      const response = await fetch(
+        "http://localhost:5189/api/Projeto/inscrever",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(voluntario),
+        }
+      );
 
       if (response.ok) {
         setMostrarModalSucesso(true);
@@ -58,7 +60,9 @@ const FormsVoluntario = ({ fecharFormulario }) => {
         setConcorda(false);
         setMensagem("");
       } else {
-        setMensagem("Erro ao cadastrar. Verifique os campos e tente novamente.");
+        setMensagem(
+          "Erro ao cadastrar. Verifique os campos e tente novamente."
+        );
       }
     } catch (error) {
       console.error("Erro:", error);
@@ -68,7 +72,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
 
   const handleOk = () => {
     setMostrarModalSucesso(false);
-    navigate("/"); 
+    navigate("/");
   };
 
   return (
@@ -85,7 +89,9 @@ const FormsVoluntario = ({ fecharFormulario }) => {
         </div>
 
         <div className="formulario-voluntario-conteudo">
-          <h3 className="formulario-voluntario-titulo">Formulário Voluntário</h3>
+          <h3 className="formulario-voluntario-titulo">
+            Formulário Voluntário
+          </h3>
 
           <form className="formulario-voluntario-form" onSubmit={handleSubmit}>
             <input
@@ -155,9 +161,9 @@ const FormsVoluntario = ({ fecharFormulario }) => {
                 Concordo com os termos de privacidade
               </label>
               <p className="form-privacidade-info">
-                Ao fornecer suas informações, você confirma que concorda com nossos
-                requisitos e autoriza o uso deles conforme nossa política de
-                privacidade.
+                Ao fornecer suas informações, você confirma que concorda com
+                nossos requisitos e autoriza o uso deles conforme nossa política
+                de privacidade.
               </p>
             </div>
 

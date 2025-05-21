@@ -1,7 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import Navbar from "../../components/Menu/Navbar";
-import './styles.css';
+import "./styles.css";
 import fotocard from "../../assets/fotocard.png";
 
 function Evento() {
@@ -14,25 +14,27 @@ function Evento() {
     const fetchEvento = async () => {
       try {
         setLoading(true);
-        const response = await fetch(`http://localhost:5189/api/Evento/${id}`);
-        
+        const response = await fetch(
+          `http://localhost:5189/api/Evento/${id}`
+        );
+
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
-        
+
         const data = await response.json();
         console.log("Dados do evento:", data);
-        
+
         const eventoComImagem = {
           ...data,
-          imagemUrl: data.imagemUrl 
+          imagemUrl: data.imagemUrl
             ? `http://localhost:5189/api/galeria/${data.imagemUrl}`
-            : null
+            : null,
         };
-        
+
         setEvento(eventoComImagem);
       } catch (err) {
-        console.error('Erro ao buscar evento:', err);
+        console.error("Erro ao buscar evento:", err);
         setError(err.message);
       } finally {
         setLoading(false);
@@ -44,7 +46,8 @@ function Evento() {
 
   const handleImageError = (e) => {
     e.target.src = fotocard;
-    e.target.alt = "Imagem padrão - não foi possível carregar a imagem do evento";
+    e.target.alt =
+      "Imagem padrão - não foi possível carregar a imagem do evento";
   };
 
   if (loading) return <div className="loading">Carregando...</div>;
@@ -56,7 +59,7 @@ function Evento() {
       <Navbar />
       <div className="evento-fundo">
         <div className="evento-container">
-          <h2 className="evento-titulo">{evento.nome}</h2>   
+          <h2 className="evento-titulo">{evento.nome}</h2>
           <img
             src={evento.imagemUrl || fotocard}
             alt={evento.nome}
