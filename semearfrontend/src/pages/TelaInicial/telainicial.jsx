@@ -52,31 +52,45 @@ const TelaInicial = () => {
     setModalAberto(false);
   };
 
-  const confirmarDeletar = () => {
-    if (!eventoParaDeletar) return;
+const confirmarDeletar = () => {
+  if (!eventoParaDeletar) return;
 
-    const headers = eventoParaDeletar.publicado
-      ? {}
-      : { Authorization: `Bearer ${token}` };
+  console.log("Deletando evento ID:", eventoParaDeletar.id);
 
-    fetch(`http://localhost:5189/api/Evento/${eventoParaDeletar.id}`, {
-      method: "DELETE",
-      headers,
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error("Erro ao deletar");
-        setRascunhos((prev) => prev.filter((e) => e.id !== eventoParaDeletar.id));
-        setPublicados((prev) => prev.filter((e) => e.id !== eventoParaDeletar.id));
-        fecharModal();
-      })
-      .catch((err) => {
-        console.error("Erro ao deletar evento:", err);
-        fecharModal();
-      });
+  const headers = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json",
   };
 
- const editarEvento = (evento) => {
-  navigate("/publicacao", { state: { eventoId: evento.id } });
+  fetch(`http://localhost:5189/api/Evento/${eventoParaDeletar.id}`, {
+    method: "DELETE",
+    headers,
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error(`Erro ao deletar. Status: ${res.status}`);
+      }
+
+      setRascunhos((prev) =>
+        prev.filter((e) => e.id !== eventoParaDeletar.id)
+      );
+      setPublicados((prev) =>
+        prev.filter((e) => e.id !== eventoParaDeletar.id)
+      );
+      fecharModal();
+    })
+    .catch((err) => {
+      console.error("Erro ao deletar evento:", err);
+      fecharModal();
+    });
+};
+
+const editarEvento = (evento) => {
+  navigate("/publicacao", { 
+    state: { 
+      eventoId: evento.id 
+    } 
+  });
 };
 
 
@@ -189,4 +203,3 @@ const TelaInicial = () => {
 };
 
 export default TelaInicial;
-
