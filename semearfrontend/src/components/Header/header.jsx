@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 import logo from "../../assets/logo.semear.png";
@@ -16,8 +15,10 @@ const Header = () => {
   const [novoProjeto, setNovoProjeto] = useState({
     nome: "",
     descricao: "",
-    dataInicio: "",
-    dataFim: ""
+    dataInicio: new Date().toISOString().split('T')[0],
+    dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    ehEventoEspecifico: false,
+    tipoEventoEspecifico: ""
   });
 
   useEffect(() => {
@@ -28,7 +29,13 @@ const Header = () => {
 
   const fetchProjetos = async () => {
     try {
-      const response = await fetch("http://localhost:5189/api/Projeto");
+      const token = localStorage.getItem('token');
+      const response = await fetch("http://localhost:5189/api/Projeto/admin", {
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
+      });
+      
       if (response.ok) {
         const data = await response.json();
         setProjetos(data);
@@ -51,44 +58,67 @@ const Header = () => {
     setNovoProjeto({
       nome: "",
       descricao: "",
-      dataInicio: "",
-      dataFim: ""
+      dataInicio: new Date().toISOString().split('T')[0],
+      dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      ehEventoEspecifico: false,
+      tipoEventoEspecifico: ""
     });
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value, type, checked } = e.target;
     setNovoProjeto({
       ...novoProjeto,
-      [name]: value
+      [name]: type === 'checkbox' ? checked : value
     });
   };
 
-  const handleCadastrar = async () => {
-  try {
-    const token = localStorage.getItem('token'); 
-    
-    const response = await fetch("http://localhost:5189/api/Projeto", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}` 
-      },
-      body: JSON.stringify(novoProjeto),
-    });
-
-    if (response.ok) {
-      fetchProjetos();
-      toggleCadastro();
-    } else {
-      console.error("Erro ao cadastrar projeto");
-      const errorData = await response.json();
-      console.error("Detalhes do erro:", errorData);
+  const validarDatas = () => {
+    if (novoProjeto.dataInicio && novoProjeto.dataFim) {
+      const inicio = new Date(novoProjeto.dataInicio);
+      const fim = new Date(novoProjeto.dataFim);
+      return fim >= inicio;
     }
-  } catch (error) {
-    console.error("Erro na requisição:", error);
-  }
-};
+    return true;
+  };
+
+  const handleCadastrar = async () => {
+    try {
+      if (!validarDatas()) {
+        alert("A data de término deve ser posterior à data de início");
+        return;
+      }
+
+      const token = localStorage.getItem('token');
+      
+      const projetoParaEnviar = {
+        ...novoProjeto,
+        dataInicio: novoProjeto.dataInicio ? `${novoProjeto.dataInicio}T00:00:00.000Z` : null,
+        dataFim: novoProjeto.dataFim ? `${novoProjeto.dataFim}T23:59:59.999Z` : null
+      };
+
+      const response = await fetch("http://localhost:5189/api/Projeto", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}` 
+        },
+        body: JSON.stringify(projetoParaEnviar),
+      });
+
+      if (response.ok) {
+        fetchProjetos();
+        toggleCadastro();
+      } else {
+        const errorData = await response.json();
+        alert(`Erro ao cadastrar: ${errorData.title || 'Erro desconhecido'}`);
+        console.error("Detalhes do erro:", errorData);
+      }
+    } catch (error) {
+      console.error("Erro na requisição:", error);
+      alert("Erro na conexão com o servidor");
+    }
+  };
 
   const handleToggleStatus = (projeto, action) => {
     setProjetoToToggle(projeto);
@@ -98,9 +128,13 @@ const Header = () => {
 
   const confirmToggleStatus = async () => {
     try {
+      const token = localStorage.getItem('token');
       const url = `http://localhost:5189/api/Projeto/${actionType.toLowerCase()}/${projetoToToggle.id}`;
       const response = await fetch(url, {
         method: "PUT",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       });
 
       if (response.ok) {
@@ -117,6 +151,10 @@ const Header = () => {
   const filteredProjetos = projetos.filter(projeto =>
     projeto.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const isProjetoAtivo = (projeto) => {
+    return projeto.status === 0; 
+  };
 
   return (
     <>
@@ -157,6 +195,7 @@ const Header = () => {
                       placeholder="Digite o nome do projeto"
                       value={novoProjeto.nome}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   
@@ -167,6 +206,7 @@ const Header = () => {
                       placeholder="Descreva o projeto"
                       value={novoProjeto.descricao}
                       onChange={handleInputChange}
+                      required
                     />
                   </div>
                   
@@ -178,6 +218,7 @@ const Header = () => {
                         name="dataInicio"
                         value={novoProjeto.dataInicio}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                     
@@ -188,15 +229,51 @@ const Header = () => {
                         name="dataFim"
                         value={novoProjeto.dataFim}
                         onChange={handleInputChange}
+                        required
                       />
                     </div>
                   </div>
+
+                  {!validarDatas() && (
+                    <div className="erro-validacao">
+                      A data de término deve ser posterior à data de início
+                    </div>
+                  )}
+
+                  <div className="form-group">
+                    <label>
+                      <input
+                        type="checkbox"
+                        name="ehEventoEspecifico"
+                        checked={novoProjeto.ehEventoEspecifico}
+                        onChange={handleInputChange}
+                      />
+                      É um evento específico?
+                    </label>
+                  </div>
+
+                  {novoProjeto.ehEventoEspecifico && (
+                    <div className="form-group">
+                      <label>Tipo de Evento</label>
+                      <input
+                        type="text"
+                        name="tipoEventoEspecifico"
+                        placeholder="Digite o tipo de evento"
+                        value={novoProjeto.tipoEventoEspecifico}
+                        onChange={handleInputChange}
+                      />
+                    </div>
+                  )}
                   
                   <div className="form-buttons">
                     <button className="cancelar-btn" onClick={toggleCadastro}>
                       Voltar
                     </button>
-                    <button className="confirmar-btn" onClick={handleCadastrar}>
+                    <button 
+                      className="confirmar-btn" 
+                      onClick={handleCadastrar}
+                      disabled={!validarDatas()}
+                    >
                       Cadastrar
                     </button>
                   </div>
@@ -224,8 +301,8 @@ const Header = () => {
                       <li key={projeto.id}>
                         <div className="projeto-info">
                           <span className="projeto-nome">{projeto.nome}</span>
-                          <span className={`projeto-status ${projeto.ativo ? "ativo" : "inativo"}`}>
-                            {projeto.ativo ? "Ativo" : "Inativo"}
+                          <span className={`projeto-status ${isProjetoAtivo(projeto) ? "ativo" : "inativo"}`}>
+                            {isProjetoAtivo(projeto) ? "Ativo" : "Inativo"}
                           </span>
                         </div>
                         <div className="projeto-actions">
@@ -234,8 +311,8 @@ const Header = () => {
                               <FaEllipsisV />
                             </button>
                             <div className="dropdown-menu">
-                              <button onClick={() => handleToggleStatus(projeto, projeto.ativo ? "Desativar" : "Ativar")}>
-                                {projeto.ativo ? "Desativar" : "Ativar"}
+                              <button onClick={() => handleToggleStatus(projeto, isProjetoAtivo(projeto) ? "desativar" : "ativar")}>
+                                {isProjetoAtivo(projeto) ? "Desativar" : "Ativar"}
                               </button>
                             </div>
                           </div>
@@ -257,7 +334,7 @@ const Header = () => {
       {showConfirmModal && (
         <div className="confirm-modal-overlay">
           <div className="confirm-modal">
-            <h3>Tem certeza que deseja {actionType.toLowerCase()} este projeto?</h3>
+            <h3>Tem certeza que deseja {actionType} este projeto?</h3>
             <p>{projetoToToggle?.nome}</p>
             <div className="confirm-modal-buttons">
               <button className="cancelar-btn" onClick={() => setShowConfirmModal(false)}>
