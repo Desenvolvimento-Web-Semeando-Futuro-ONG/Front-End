@@ -14,8 +14,8 @@ const Sidebar = () => {
   ];
 
   const bottomItems = [
-    { name: 'Configurações', icon: <FiSettings />, path: '/settings' },
-    { name: 'Sair', icon: <FiLogOut />, path: '/logout' },
+    { name: 'Configurações', icon: <FiSettings />, path: '/configuracao' },
+    { name: 'Sair', icon: <FiLogOut />, path: '/' },
   ];
 
   const handleNavigate = (path) => {

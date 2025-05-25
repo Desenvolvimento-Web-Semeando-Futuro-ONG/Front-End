@@ -7,6 +7,7 @@ import Publicacao from "./pages/Publicacao/publicacao";
 import Judo from "./pages/Projetos/projetojudo";
 import Evento from "./pages/Evento/evento";
 import TelaInicial from "./pages/TelaInicial/telainicial";
+import ConfiguracoesAdm from "./pages/configuracao/configuracao";
 import Voluntarios from "./pages/Voluntarios/voluntarios";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -20,6 +21,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/evento/:id" element={<Evento />} />
         <Route path="/telainicial" element={<TelaInicial />} />
         <Route path="/voluntarios" element={<Voluntarios />} />
+        <Route path="/configuracao" element={<ConfiguracoesAdm />} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
