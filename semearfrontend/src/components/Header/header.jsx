@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 import logo from "../../assets/logo.semear.png";
 import { FaEllipsisV, FaTimes, FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
@@ -15,11 +16,19 @@ const Header = () => {
   const [novoProjeto, setNovoProjeto] = useState({
     nome: "",
     descricao: "",
-    dataInicio: new Date().toISOString().split('T')[0],
-    dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+    dataInicio: new Date().toISOString().split("T")[0],
+    dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0],
     ehEventoEspecifico: false,
-    tipoEventoEspecifico: ""
+    tipoEventoEspecifico: "",
   });
+
+  const navigate = useNavigate();
+
+  const irParaPublicacao = () => {
+    navigate("/publicacao");
+  };
 
   useEffect(() => {
     if (showModal) {
@@ -29,13 +38,13 @@ const Header = () => {
 
   const fetchProjetos = async () => {
     try {
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:5189/api/Projeto/admin", {
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
-      
+
       if (response.ok) {
         const data = await response.json();
         setProjetos(data);
@@ -58,10 +67,12 @@ const Header = () => {
     setNovoProjeto({
       nome: "",
       descricao: "",
-      dataInicio: new Date().toISOString().split('T')[0],
-      dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+      dataInicio: new Date().toISOString().split("T")[0],
+      dataFim: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000)
+        .toISOString()
+        .split("T")[0],
       ehEventoEspecifico: false,
-      tipoEventoEspecifico: ""
+      tipoEventoEspecifico: "",
     });
   };
 
@@ -69,7 +80,7 @@ const Header = () => {
     const { name, value, type, checked } = e.target;
     setNovoProjeto({
       ...novoProjeto,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === "checkbox" ? checked : value,
     });
   };
 
@@ -89,19 +100,23 @@ const Header = () => {
         return;
       }
 
-      const token = localStorage.getItem('token');
-      
+      const token = localStorage.getItem("token");
+
       const projetoParaEnviar = {
         ...novoProjeto,
-        dataInicio: novoProjeto.dataInicio ? `${novoProjeto.dataInicio}T00:00:00.000Z` : null,
-        dataFim: novoProjeto.dataFim ? `${novoProjeto.dataFim}T23:59:59.999Z` : null
+        dataInicio: novoProjeto.dataInicio
+          ? `${novoProjeto.dataInicio}T00:00:00.000Z`
+          : null,
+        dataFim: novoProjeto.dataFim
+          ? `${novoProjeto.dataFim}T23:59:59.999Z`
+          : null,
       };
 
       const response = await fetch("http://localhost:5189/api/Projeto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}` 
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(projetoParaEnviar),
       });
@@ -111,7 +126,7 @@ const Header = () => {
         toggleCadastro();
       } else {
         const errorData = await response.json();
-        alert(`Erro ao cadastrar: ${errorData.title || 'Erro desconhecido'}`);
+        alert(`Erro ao cadastrar: ${errorData.title || "Erro desconhecido"}`);
         console.error("Detalhes do erro:", errorData);
       }
     } catch (error) {
@@ -128,13 +143,15 @@ const Header = () => {
 
   const confirmToggleStatus = async () => {
     try {
-      const token = localStorage.getItem('token');
-      const url = `http://localhost:5189/api/Projeto/${actionType.toLowerCase()}/${projetoToToggle.id}`;
+      const token = localStorage.getItem("token");
+      const url = `http://localhost:5189/api/Projeto/${actionType.toLowerCase()}/${
+        projetoToToggle.id
+      }`;
       const response = await fetch(url, {
         method: "PUT",
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
 
       if (response.ok) {
@@ -148,12 +165,12 @@ const Header = () => {
     }
   };
 
-  const filteredProjetos = projetos.filter(projeto =>
+  const filteredProjetos = projetos.filter((projeto) =>
     projeto.nome.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
   const isProjetoAtivo = (projeto) => {
-    return projeto.status === 0; 
+    return projeto.status === 0;
   };
 
   return (
@@ -165,8 +182,12 @@ const Header = () => {
         </div>
 
         <div className="header-right">
-          <button className="header-btn" onClick={toggleModal}>Projetos</button>
-          <button className="header-btn">Eventos</button>
+          <button className="header-btn" onClick={toggleModal}>
+            Projetos
+          </button>
+          <button className="header-btn" onClick={irParaPublicacao}>
+            Eventos
+          </button>
         </div>
       </header>
 
@@ -176,7 +197,7 @@ const Header = () => {
             <button className="modal-fechar" onClick={toggleModal}>
               <FaTimes />
             </button>
-            
+
             {showCadastro ? (
               <div className="projetos-modal-conteudo">
                 <div className="modal-header">
@@ -185,7 +206,7 @@ const Header = () => {
                   </button>
                   <h2 className="modal-titulo">Cadastrar Novo Projeto</h2>
                 </div>
-                
+
                 <div className="projeto-form">
                   <div className="form-group">
                     <label>Nome do Projeto</label>
@@ -198,7 +219,7 @@ const Header = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Descrição</label>
                     <textarea
@@ -209,7 +230,7 @@ const Header = () => {
                       required
                     />
                   </div>
-                  
+
                   <div className="form-row">
                     <div className="form-group">
                       <label>Data de Início</label>
@@ -221,7 +242,7 @@ const Header = () => {
                         required
                       />
                     </div>
-                    
+
                     <div className="form-group">
                       <label>Data de Término</label>
                       <input
@@ -264,13 +285,13 @@ const Header = () => {
                       />
                     </div>
                   )}
-                  
+
                   <div className="form-buttons">
                     <button className="cancelar-btn" onClick={toggleCadastro}>
                       Voltar
                     </button>
-                    <button 
-                      className="confirmar-btn" 
+                    <button
+                      className="confirmar-btn"
                       onClick={handleCadastrar}
                       disabled={!validarDatas()}
                     >
@@ -282,7 +303,7 @@ const Header = () => {
             ) : (
               <div className="projetos-modal-conteudo">
                 <h2 className="modal-titulo">Lista de Projetos</h2>
-                
+
                 <div className="search-container">
                   <input
                     type="text"
@@ -294,14 +315,18 @@ const Header = () => {
                     Cadastrar
                   </button>
                 </div>
-                
+
                 <ul className="projetos-lista">
                   {filteredProjetos.length > 0 ? (
                     filteredProjetos.map((projeto) => (
                       <li key={projeto.id}>
                         <div className="projeto-info">
                           <span className="projeto-nome">{projeto.nome}</span>
-                          <span className={`projeto-status ${isProjetoAtivo(projeto) ? "ativo" : "inativo"}`}>
+                          <span
+                            className={`projeto-status ${
+                              isProjetoAtivo(projeto) ? "ativo" : "inativo"
+                            }`}
+                          >
                             {isProjetoAtivo(projeto) ? "Ativo" : "Inativo"}
                           </span>
                         </div>
@@ -311,8 +336,19 @@ const Header = () => {
                               <FaEllipsisV />
                             </button>
                             <div className="dropdown-menu">
-                              <button onClick={() => handleToggleStatus(projeto, isProjetoAtivo(projeto) ? "desativar" : "ativar")}>
-                                {isProjetoAtivo(projeto) ? "Desativar" : "Ativar"}
+                              <button
+                                onClick={() =>
+                                  handleToggleStatus(
+                                    projeto,
+                                    isProjetoAtivo(projeto)
+                                      ? "desativar"
+                                      : "ativar"
+                                  )
+                                }
+                              >
+                                {isProjetoAtivo(projeto)
+                                  ? "Desativar"
+                                  : "Ativar"}
                               </button>
                             </div>
                           </div>
@@ -320,9 +356,7 @@ const Header = () => {
                       </li>
                     ))
                   ) : (
-                    <div className="lista-vazia">
-                      Nenhum projeto encontrado
-                    </div>
+                    <div className="lista-vazia">Nenhum projeto encontrado</div>
                   )}
                 </ul>
               </div>
@@ -337,7 +371,10 @@ const Header = () => {
             <h3>Tem certeza que deseja {actionType} este projeto?</h3>
             <p>{projetoToToggle?.nome}</p>
             <div className="confirm-modal-buttons">
-              <button className="cancelar-btn" onClick={() => setShowConfirmModal(false)}>
+              <button
+                className="cancelar-btn"
+                onClick={() => setShowConfirmModal(false)}
+              >
                 Cancelar
               </button>
               <button className="confirmar-btn" onClick={confirmToggleStatus}>
