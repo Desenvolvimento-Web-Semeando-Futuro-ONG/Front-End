@@ -9,6 +9,8 @@ import Evento from "./pages/Evento/evento";
 import TelaInicial from "./pages/TelaInicial/telainicial";
 import ConfiguracoesAdm from "./pages/configuracao/configuracao";
 import Voluntarios from "./pages/Voluntarios/voluntarios";
+import Doacao from "./pages/Doação/doacao";
+
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -22,6 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="/telainicial" element={<TelaInicial />} />
         <Route path="/voluntarios" element={<Voluntarios />} />
         <Route path="/configuracao" element={<ConfiguracoesAdm />} />
+        <Route path="/doacao" element={< Doacao/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>
