@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './styles.css';
 import Navbar from "../../components/Menu/Navbar";
-import { FaWhatsapp, FaCopy } from 'react-icons/fa';
+import { FaWhatsapp, FaCopy, FaInstagram, FaFacebookF, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 import QRCode from 'react-qr-code';
 import fundoPublicacao from '../../assets/fundopublicacao.png';
 import educacaoImage from '../../assets/recreativa.png';
 import materiaisImage from '../../assets/criança.foto.png';
-import { FaInstagram, FaFacebookF, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
 
 const Doacao = () => {
   const [formVisible, setFormVisible] = useState(false);
@@ -31,33 +30,31 @@ const Doacao = () => {
     setIsLoading(true);
 
     try {
-      const doadorResponse = await fetch('http://localhost:5189/api/Doador', {
+      const response = await fetch('http://localhost:5189/api/Doador', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(dados),
-      });
-
-      if (!doadorResponse.ok) {
-        throw new Error('Erro ao salvar dados do doador');
-      }
-
-      const pixResponse = await fetch('http://localhost:5189/api/Doador/doacoes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
-          valor: dados.valorDoacao,
-          chave: '42.054.664/0001-83',
-          beneficiario: dados.nome
+          nome: dados.nome,
+          telefone: dados.telefone,
+          cpf: dados.cpf,
+          email: dados.email,
+          valorDoacao: parseFloat(dados.valorDoacao),
+          metodoPagamento: dados.metodoPagamento,
+          chavePix: '42.054.664/0001-83'
         }),
       });
 
-      if (pixResponse.ok) {
-        setShowQRCode(true);
-      } else {
-        throw new Error('Erro ao gerar QR Code');
+      if (!response.ok) {
+        throw new Error('Erro ao processar doação');
       }
+
+      setShowQRCode(true);
+      
     } catch (error) {
-      console.error(error);
+      console.error('Erro:', error);
       alert(error.message || 'Erro ao processar doação');
     } finally {
       setIsLoading(false);
@@ -70,7 +67,8 @@ const Doacao = () => {
   };
 
   const generatePixPayload = () => {
-    return `00020126360014BR.GOV.BCB.PIX011142054664000183520400005303986540${parseFloat(dados.valorDoacao).toFixed(2)}5802BR5920Semeando o Futuro6009Sao Paulo62070503***6304`;
+    const valor = parseFloat(dados.valorDoacao).toFixed(2);
+    return `00020126360014BR.GOV.BCB.PIX011142054664000183520400005303986540${valor}5802BR5920Semeando o Futuro6009Sao Paulo62070503***6304`;
   };
 
   return (
@@ -116,6 +114,7 @@ const Doacao = () => {
                   </div>
                 </div>
               </div>
+
               <div className="doacao-plan-card">
                 <div className="card-image-container">
                   <img src={materiaisImage} alt="Materiais" className="card-image" />
@@ -268,25 +267,26 @@ const Doacao = () => {
       >
         <FaWhatsapp size={38} />
       </a>
-       <footer className="site-footer">
-            <div className="footer-content">
-              <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
-              <div className="social-icons">
-                <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                  <FaInstagram />
-                </a>
-                <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                  <FaFacebookF />
-                </a>
-                <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <FaLinkedinIn />
-                </a>
-                <a href="mailto:contato@seudominio.com" aria-label="E-mail">
-                  <FaEnvelope />
-                </a>
-              </div>
-            </div>
-          </footer>
+
+      <footer className="site-footer">
+        <div className="footer-content">
+          <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
+          <div className="social-icons">
+            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+              <FaInstagram />
+            </a>
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+              <FaFacebookF />
+            </a>
+            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <FaLinkedinIn />
+            </a>
+            <a href="mailto:contato@seudominio.com" aria-label="E-mail">
+              <FaEnvelope />
+            </a>
+          </div>
+        </div>
+      </footer>
     </>
   );
 };
