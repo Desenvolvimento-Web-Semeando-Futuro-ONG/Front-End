@@ -1,4 +1,3 @@
-
 .tela-inicial {
   display: flex;
   min-height: 100vh;
@@ -11,10 +10,17 @@
   flex-direction: column;
 }
 
-.content {
+.contentt {
   padding: 20px 40px;
 }
 
+.imagem-banner {
+  margin-left: 250px;
+}
+.modalparagrafo {
+  font-family: "Poppins", sans-serif;
+  color: #092c4c;
+}
 .banner-projeto {
   background-color: rgba(129, 192, 79, 0.75);
   padding: 30px 50px;
@@ -31,12 +37,11 @@
 .texto-banner {
   max-width: 500px;
   color: #fff;
-
 }
 
 .texto-banner .bem-vindo {
   font-size: 14px;
-  font-weight: 300; 
+  font-weight: 300;
   text-transform: uppercase;
   padding: 4px 10px;
   border-radius: 8px;
@@ -71,7 +76,8 @@
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #202020;
+  color: #092c4c;
+  font-family: "Poppins", sans-serif;
 }
 
 .grid-eventos {
@@ -100,7 +106,7 @@
 
 .card-header img {
   width: 100%;
-  height: 100px; 
+  height: 100px;
   object-fit: cover;
   object-position: center;
 }
@@ -134,7 +140,7 @@
 }
 
 .card-tituloo {
-  font-size: 0.75rem; 
+  font-size: 0.75rem;
   font-weight: 600;
   color: #333;
   margin-top: 6px;
@@ -178,6 +184,10 @@
   transition: color 0.3s;
 }
 
+.title-modall {
+   font-family: "Inter", sans-serif;
+   color: #092c4c;
+}
 .card-icones button:hover {
   color: #81c04f;
 }
@@ -195,7 +205,6 @@
   background: transparent;
 }
 
-
 .card-icones button[title="Excluir"]:hover svg {
   color: #dc3545;
   transition: color 0.3s ease;
@@ -212,20 +221,22 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
 }
 
-.modal-content {
+.modal-contentt {
   background-color: white;
   padding: 24px;
   border-radius: 8px;
   width: 100%;
   max-width: 400px;
   text-align: center;
+  font-size: 1rem;
+  line-height: 1.5;
 }
 
 .modal-buttons {
@@ -235,20 +246,27 @@
 }
 
 .btn-cancelar {
-  background-color: #ccc;
-  padding: 8px 16px;
-  border-radius: 4px;
+background-color: #9bcd78;
+  color: white;
   border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .btn-confirmar {
-  background-color: #dc3545;
+ background-color: #c82333;
   color: white;
-  padding: 8px 16px;
-  border-radius: 4px;
   border: none;
+  padding: 12px 25px;
+  border-radius: 10px;
   cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
 .btn-confirmar:hover {

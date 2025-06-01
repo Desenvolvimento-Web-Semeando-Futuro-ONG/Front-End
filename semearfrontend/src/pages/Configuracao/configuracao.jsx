@@ -43,7 +43,7 @@ const ConfiguracoesAdministradores = () => {
     const buscarPerfilAdministrador = async () => {
       try {
         const tokenAutenticacao = localStorage.getItem("token");
-        const respostaRequisicao = await fetch("http://localhost:5189/api/Adm/perfil", {
+        const respostaRequisicao = await fetch("https://back-end-n1cl.onrender.com/api/Adm/perfil", {
           headers: {
             Authorization: `Bearer ${tokenAutenticacao}`,
           },
@@ -63,25 +63,25 @@ const ConfiguracoesAdministradores = () => {
     buscarPerfilAdministrador();
   }, []);
 
+  const buscarTodosAdministradores = async () => {
+    try {
+      const tokenAutenticacao = localStorage.getItem("token");
+      const respostaRequisicao = await fetch("https://back-end-n1cl.onrender.com/api/Adm", {
+        headers: {
+          Authorization: `Bearer ${tokenAutenticacao}`,
+        },
+      });
+
+      if (!respostaRequisicao.ok) throw new Error("Erro ao carregar administradores");
+      
+      const dadosAdministradores = await respostaRequisicao.json();
+      setListaAdministradores(dadosAdministradores);
+    } catch (erro) {
+      setErroRequisicao(erro.message);
+    }
+  };
+
   useEffect(() => {
-    const buscarTodosAdministradores = async () => {
-      try {
-        const tokenAutenticacao = localStorage.getItem("token");
-        const respostaRequisicao = await fetch("http://localhost:5189/api/Adm", {
-          headers: {
-            Authorization: `Bearer ${tokenAutenticacao}`,
-          },
-        });
-
-        if (!respostaRequisicao.ok) throw new Error("Erro ao carregar administradores");
-        
-        const dadosAdministradores = await respostaRequisicao.json();
-        setListaAdministradores(dadosAdministradores);
-      } catch (erro) {
-        setErroRequisicao(erro.message);
-      }
-    };
-
     buscarTodosAdministradores();
   }, []);
 
@@ -93,46 +93,46 @@ const ConfiguracoesAdministradores = () => {
     });
   };
 
- const submeterNovoAdministrador = async (evento) => {
-  evento.preventDefault();
-  setCarregandoDados(true);
-  
-  try {
-    const tokenAutenticacao = localStorage.getItem("token");
-    const respostaRequisicao = await fetch("http://localhost:5189/api/Adm", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${tokenAutenticacao}`,
-      },
-      body: JSON.stringify({
-        nome: formularioAdministrador.nomeCompleto,
-        telefone: formularioAdministrador.telefoneContato,
-        cpf: formularioAdministrador.cpfAdministrador,
-        email: formularioAdministrador.emailAdministrador,
-        login: formularioAdministrador.loginAcesso,
-        senha: formularioAdministrador.senhaAcesso
-      }),
-    });
-
-    if (!respostaRequisicao.ok) {
-      const erroData = await respostaRequisicao.json();
-      throw new Error(erroData.message || "Erro ao cadastrar administrador");
-    }
-
-    const novoAdministrador = await respostaRequisicao.json();
-    setListaAdministradores([...listaAdministradores, novoAdministrador]);
-    setModalCadastroAberto(false);
-    limparFormulario();
+  const submeterNovoAdministrador = async (evento) => {
+    evento.preventDefault();
+    setCarregandoDados(true);
     
-    setMensagemConfirmacao("Administrador cadastrado com sucesso!");
-    setModalConfirmacaoAberto(true);
-  } catch (erro) {
-    setErroRequisicao(erro.message || "Erro ao cadastrar administrador");
-  } finally {
-    setCarregandoDados(false);
-  }
-};
+    try {
+      const tokenAutenticacao = localStorage.getItem("token");
+      const respostaRequisicao = await fetch("https://back-end-n1cl.onrender.com/api/Adm", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${tokenAutenticacao}`,
+        },
+        body: JSON.stringify({
+          nome: formularioAdministrador.nomeCompleto,
+          telefone: formularioAdministrador.telefoneContato,
+          cpf: formularioAdministrador.cpfAdministrador,
+          email: formularioAdministrador.emailAdministrador,
+          login: formularioAdministrador.loginAcesso,
+          senha: formularioAdministrador.senhaAcesso
+        }),
+      });
+
+      if (!respostaRequisicao.ok) {
+        const erroData = await respostaRequisicao.json();
+        throw new Error(erroData.message || "Erro ao cadastrar administrador");
+      }
+
+      setModalCadastroAberto(false);
+      limparFormulario();
+      
+      await buscarTodosAdministradores();
+      
+      setMensagemConfirmacao("Administrador cadastrado com sucesso!");
+      setModalConfirmacaoAberto(true);
+    } catch (erro) {
+      setErroRequisicao(erro.message || "Erro ao cadastrar administrador");
+    } finally {
+      setCarregandoDados(false);
+    }
+  };
 
   const prepararEdicaoAdministrador = (administrador) => {
     setFormularioAdministrador({
@@ -152,7 +152,7 @@ const ConfiguracoesAdministradores = () => {
     
     try {
       const tokenAutenticacao = localStorage.getItem("token");
-      const respostaRequisicao = await fetch(`http://localhost:5189/api/Adm/${admLogadoData.id}`, {
+      const respostaRequisicao = await fetch(`https://back-end-n1cl.onrender.com/api/Adm/${admLogadoData.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -172,9 +172,9 @@ const ConfiguracoesAdministradores = () => {
 
       const administradorAtualizado = await respostaRequisicao.json();
       setAdmLogadoData(administradorAtualizado);
-      setListaAdministradores(listaAdministradores.map(adm => 
-        adm.id === administradorAtualizado.id ? administradorAtualizado : adm
-      ));
+      
+      await buscarTodosAdministradores();
+      
       setModalEditarAberto(false);
       
       setMensagemConfirmacao("Administrador atualizado com sucesso!");
@@ -184,6 +184,10 @@ const ConfiguracoesAdministradores = () => {
     } finally {
       setCarregandoDados(false);
     }
+  };
+
+  const fecharModalConfirmacao = () => {
+    setModalConfirmacaoAberto(false);
   };
 
   return (
@@ -521,7 +525,7 @@ const ConfiguracoesAdministradores = () => {
             <h3 className="configuracoes-adm-confirmacao-mensagem">{mensagemConfirmacao}</h3>
             <button 
               className="configuracoes-adm-confirmacao-button"
-              onClick={() => setModalConfirmacaoAberto(false)}
+              onClick={fecharModalConfirmacao}
             >
               OK
             </button>

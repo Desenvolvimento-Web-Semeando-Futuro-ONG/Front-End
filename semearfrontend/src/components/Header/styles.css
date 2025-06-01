@@ -102,9 +102,9 @@
   overflow-y: auto;
 }
 
-.modal-header {
+.modall-header {
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   margin-bottom: 25px;
 }
 
@@ -124,7 +124,7 @@
 
 .modal-titulo {
   font-size: 1.8rem;
-  margin: 10px;
+  /* margin: 10px; */
   color: #092c4c;
   font-family: 'Poppins', sans-serif;
   font-weight: 600;

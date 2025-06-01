@@ -15,7 +15,7 @@ function Evento() {
       try {
         setLoading(true);
         const response = await fetch(
-          `http://localhost:5189/api/Evento/${id}`
+          `https://back-end-n1cl.onrender.com/api/Evento/${id}`
         );
 
         if (!response.ok) {
@@ -28,7 +28,7 @@ function Evento() {
         const eventoComImagem = {
           ...data,
           imagemUrl: data.imagemUrl
-            ? `http://localhost:5189/api/galeria/${data.imagemUrl}`
+            ? `https://back-end-n1cl.onrender.com/api/galeria/${data.imagemUrl}`
             : null,
         };
 

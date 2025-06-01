@@ -1,24 +1,39 @@
-import React, { useState } from 'react';
-import './styles.css';
+import React, { useState, useRef, useEffect } from "react";
+import "./styles.css";
 import Navbar from "../../components/Menu/Navbar";
-import { FaWhatsapp, FaCopy, FaInstagram, FaFacebookF, FaLinkedinIn, FaEnvelope } from 'react-icons/fa';
-import QRCode from 'react-qr-code';
-import fundoPublicacao from '../../assets/fundopublicacao.png';
-import educacaoImage from '../../assets/recreativa.png';
-import materiaisImage from '../../assets/criança.foto.png';
+import {
+  FaWhatsapp,
+  FaCopy,
+  FaInstagram,
+  FaFacebookF,
+  FaLinkedinIn,
+  FaEnvelope,
+} from "react-icons/fa";
+import QRCode from "react-qr-code";
+import fundoPublicacao from "../../assets/fundopublicacao.png";
+import educacaoImage from "../../assets/recreativa.png";
+import materiaisImage from "../../assets/criança.foto.png";
 
 const Doacao = () => {
   const [formVisible, setFormVisible] = useState(false);
   const [dados, setDados] = useState({
-    nome: '',
-    telefone: '',
-    cpf: '',
-    email: '',
-    valorDoacao: '',
-    metodoPagamento: 'pix',
+    nome: "",
+    telefone: "",
+    cpf: "",
+    email: "",
+    valorDoacao: "",
+    metodoPagamento: "pix",
   });
   const [showQRCode, setShowQRCode] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (formVisible && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [formVisible]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -30,11 +45,11 @@ const Doacao = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5189/api/Doador', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+      const response = await fetch("https://back-end-n1cl.onrender.com/api/Doador", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
           nome: dados.nome,
@@ -43,27 +58,26 @@ const Doacao = () => {
           email: dados.email,
           valorDoacao: parseFloat(dados.valorDoacao),
           metodoPagamento: dados.metodoPagamento,
-          chavePix: '42.054.664/0001-83'
+          chavePix: "42.054.664/0001-83",
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Erro ao processar doação');
+        throw new Error("Erro ao processar doação");
       }
 
       setShowQRCode(true);
-      
     } catch (error) {
-      console.error('Erro:', error);
-      alert(error.message || 'Erro ao processar doação');
+      console.error("Erro:", error);
+      alert(error.message || "Erro ao processar doação");
     } finally {
       setIsLoading(false);
     }
   };
 
   const copiarChavePix = () => {
-    navigator.clipboard.writeText('42.054.664/0001-83');
-    alert('Chave Pix copiada!');
+    navigator.clipboard.writeText("42.054.664/0001-83");
+    alert("Chave Pix copiada!");
   };
 
   const generatePixPayload = () => {
@@ -74,41 +88,69 @@ const Doacao = () => {
   return (
     <>
       <Navbar />
-      
       <section id="home" className="hero-sectionn">
         <div className="hero-contentt">
           <h1>
-            DOE nos ajude<span className="highlight">jovens</span>,
+            Doe e nos ajude a transformar
+            <br />
+            o futuro de <span className="highlightt">jovens</span>.
           </h1>
-          <button className="cta-button">Doação</button>
+          <button
+            className="cta-buttonn"
+            aria-label="Fazer uma doação agora"
+            onClick={() => {
+              const target = document.getElementById("doacao");
+              if (target) {
+                target.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            Faça uma Doação
+          </button>
         </div>
-      </section>   
-      
-      <div className="doacao-background" style={{backgroundImage: `url(${fundoPublicacao})`}}>
+      </section>
+
+      <div
+        className="doacao-background"
+        style={{ backgroundImage: `url(${fundoPublicacao})` }}
+      >
         <div className="doacao-container">
           <div className="doacao-content">
-            <h1 className="doacao-header">Ajude nessa causa:</h1>
+            <h1 className="doacao-header">Ajude nessa causa</h1>
+            <div className="doacao-intro-box">
+              <p className="doacao-intro-text">
+                Sua contribuição é a ponte entre a esperança e a realidade. Com
+                sua ajuda, conseguimos levar{" "}
+                <strong>alimentos, água potável, saúde, educação</strong> e
+                oportunidades para quem mais precisa.
+              </p>
 
-            <p className="doacao-intro-text">
-              Para que possamos continuar transformando milhares de vidas com alimentos, água e acesso à saúde, educação e geração de renda, precisamos muito de sua ajuda.
-            </p>
+              <p className="doacao-intro-text destaque">
+                Um pequeno gesto seu pode representar tudo para quem não tem
+                nada. <strong>Você transforma vidas!</strong>
+              </p>
+            </div>
 
-            <p className="doacao-highlight-text">
-              Um pouco de você é muito para quem não tem nada! Você faz a diferença.
-            </p>
-
-            <div className="doacao-plans-container">
+            <div id="doacao" className="doacao-plans-container">
               <div className="doacao-plan-card">
                 <div className="card-image-container">
-                  <img src={educacaoImage} alt="Educação" className="card-image" />
-                </div> 
+                  <img
+                    src={educacaoImage}
+                    alt="Educação"
+                    className="card-image"
+                  />
+                </div>
                 <div className="card-content">
                   <h3 className="doacao-plan-title">VALOR </h3>
                   <p className="doacao-plan-description">
-                    A sua doação ajuda nos a levar educação para milhares e jovens que ainda vivem em casas de barro.
+                    A sua doação ajudará a pagar despesas, investir em
+                    atividades e ajudar crianças.
                   </p>
                   <div className="doacao-plan-footer">
-                    <button className="doacao-select-button" onClick={() => setFormVisible(true)}>
+                    <button
+                      className="doacao-select-button"
+                      onClick={() => setFormVisible(true)}
+                    >
                       ESCOLHER
                     </button>
                   </div>
@@ -117,12 +159,17 @@ const Doacao = () => {
 
               <div className="doacao-plan-card">
                 <div className="card-image-container">
-                  <img src={materiaisImage} alt="Materiais" className="card-image" />
+                  <img
+                    src={materiaisImage}
+                    alt="Materiais"
+                    className="card-image"
+                  />
                 </div>
                 <div className="card-content">
                   <h3 className="doacao-plan-title">MATERIAIS</h3>
                   <p className="doacao-plan-description">
-                    A sua doação nos ajuda a levar água, alimentos e materiais para milhares de pessoas.
+                    Doação em materiais como Kimonos, materiais de higiene,
+                    materiais escolares
                   </p>
                   <div className="doacao-plan-footer">
                     <a
@@ -139,9 +186,12 @@ const Doacao = () => {
             </div>
 
             {formVisible && (
-              <form className="doacao-form" onSubmit={handleSubmit}>
+              <form
+                className="doacao-form"
+                onSubmit={handleSubmit}
+                ref={formRef}
+              >
                 <h3 className="doacao-form-title">DADOS PESSOAIS</h3>
-
                 <div className="doacao-input-group">
                   <label className="doacao-input-label">CPF</label>
                   <input
@@ -149,14 +199,14 @@ const Doacao = () => {
                     name="cpf"
                     value={dados.cpf}
                     onChange={handleInputChange}
-                    className="doacao-input-field"
+                    className="doacao-input-field campo-cpf"
                     placeholder="000.000.000-00"
                   />
                 </div>
 
                 <div className="doacao-row">
                   <div className="doacao-input-group">
-                    <label className="doacao-input-label">Nome *</label>
+                    <label className="doacao-input-label">Nome </label>
                     <input
                       type="text"
                       name="nome"
@@ -168,7 +218,7 @@ const Doacao = () => {
                     />
                   </div>
                   <div className="doacao-input-group">
-                    <label className="doacao-input-label">Email *</label>
+                    <label className="doacao-input-label">Email </label>
                     <input
                       type="email"
                       name="email"
@@ -183,7 +233,7 @@ const Doacao = () => {
 
                 <div className="doacao-row">
                   <div className="doacao-input-group">
-                    <label className="doacao-input-label">Telefone *</label>
+                    <label className="doacao-input-label">Telefone </label>
                     <input
                       type="tel"
                       name="telefone"
@@ -195,14 +245,16 @@ const Doacao = () => {
                     />
                   </div>
                   <div className="doacao-input-group">
-                    <label className="doacao-input-label">Valor da Doação (R$) *</label>
+                    <label className="doacao-input-label">
+                      Valor da Doação (R$) 
+                    </label>
                     <input
                       type="number"
                       name="valorDoacao"
                       value={dados.valorDoacao}
                       onChange={handleInputChange}
                       className="doacao-input-field"
-                      placeholder="100.00"
+                      placeholder="1.0"
                       min="1"
                       step="0.01"
                       required
@@ -217,14 +269,19 @@ const Doacao = () => {
                       type="radio"
                       name="metodoPagamento"
                       value="pix"
-                      checked={dados.metodoPagamento === 'pix'}
+                      checked={dados.metodoPagamento === "pix"}
                       onChange={handleInputChange}
-                    /> PIX
+                    />{" "}
+                    PIX
                   </label>
                 </div>
 
-                <button className="doacao-submit-button" type="submit" disabled={isLoading}>
-                  {isLoading ? 'GERANDO PIX...' : 'GERAR PIX'}
+                <button
+                  className="doacao-submit-button"
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  {isLoading ? "GERANDO PIX..." : "GERAR PIX"}
                 </button>
               </form>
             )}
@@ -243,9 +300,14 @@ const Doacao = () => {
                     <p>Escaneie o QR Code para realizar o pagamento</p>
                   </div>
                   <div className="pix-key">
-                    <p><strong>Chave PIX (CNPJ):</strong></p>
+                    <p>
+                      <strong>Chave PIX (CNPJ):</strong>
+                    </p>
                     <p>42.054.664/0001-83</p>
-                    <button onClick={copiarChavePix} className="doacao-select-button">
+                    <button
+                      onClick={copiarChavePix}
+                      className="doacao-select-button"
+                    >
                       <FaCopy /> Copiar Chave
                     </button>
                   </div>
@@ -260,7 +322,7 @@ const Doacao = () => {
       </div>
 
       <a
-        href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
+        href="https://wa.me/5581986541494?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
         className="doacao-whatsapp-button"
         target="_blank"
         rel="noopener noreferrer"
@@ -272,13 +334,28 @@ const Doacao = () => {
         <div className="footer-content">
           <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
           <div className="social-icons">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
               <FaInstagram />
             </a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
               <FaFacebookF />
             </a>
-            <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
               <FaLinkedinIn />
             </a>
             <a href="mailto:contato@seudominio.com" aria-label="E-mail">

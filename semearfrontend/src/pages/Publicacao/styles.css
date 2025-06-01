@@ -194,29 +194,33 @@
   font-size: 16px;
 }
 
-.modal-overlay {
+.modal-overlayy {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   z-index: 1000;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
 }
 
-.modal-content {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  text-align: center;
-  max-width: 450px;
-  width: 90%;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
-  animation: fadeIn 0.3s ease-out;
+.modal-contenttt {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  background-color: #fff;
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 20px;
+}
+
+.modal-contenttt p {
+  color: #092c4c;
+  font-size: 20px;
+  font-weight: 100;
 }
 
 @keyframes fadeIn {
@@ -238,101 +242,36 @@
   line-height: 2;
 }
 
-.modal-buttons {
+.modal-buttonss {
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 60px;
 }
 
-.modal-buttons button {
-  padding: 10px 25px;
+.modal-buttonss button {
+  background-color: #9bcd78;
+  color: white;
   border: none;
-  border-radius: 6px;
+  padding: 12px 25px;
+  border-radius: 10px;
   cursor: pointer;
-  font-weight: 600;
-  transition: all 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.modal-buttons button:first-child {
+.modal-buttonss button:first-child {
   background-color: #4CAF50;
   color: white;
 }
 
-.modal-buttons button:first-child:hover {
-  background-color: #3e8e41;
+.modal-buttonss button:first-child:hover {
+   background-color: #87b96a;
+  transform: translateY(-1px);
 }
 
-.modal-buttons button:last-child {
-  background-color: #f1f1f1;
-  color: #333;
-}
-
-.modal-buttons button:last-child:hover {
-  background-color: #ddd;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* .modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-
-.modal-content {
-  background: white;
-  padding: 20px 30px;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 400px;
-  width: 100%;
-}
-
-.modal-buttons {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-}
-
-.modal-buttons button {
-  padding: 10px 20px;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.modal-buttons button:first-child {
-  background-color: #007bff;
+.modal-buttonss button:last-child {
+  background-color: rgb(209, 61, 61);;
   color: white;
 }
 
-.modal-buttons button:last-child {
-  background-color: #ccc;
-}
-
- */

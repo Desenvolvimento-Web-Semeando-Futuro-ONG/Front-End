@@ -21,14 +21,14 @@ const fluxo = {
     ],
   },
   voluntariado_inscricao: {
-    mensagem: "Você pode se inscrever acessando a seção 'Seja um Voluntário'.",
+    mensagem: "Você pode se inscrever acessando a seção 'Seja um Voluntário'. Preencha todos os dados e escolha o projeto que melhor gosta, e aguarde nosso contato!",
     opcoes: [
       { texto: "Voltar ao menu principal", next: "inicio" },
       { texto: "Encerrar", next: "fim" },
     ],
   },
   voluntariado_requisitos: {
-    mensagem: "Você pode visualizar os requisitos acessando a seção 'Seja um Voluntário'.",
+    mensagem: "Você pode visualizar os requisitos acessando a seção 'Seja um Voluntário' Você precisa apenas preencher os dados e selecionar o projeto desejado.",
     opcoes: [
       { texto: "Voltar ao menu principal", next: "inicio" },
       { texto: "Encerrar", next: "fim" },
@@ -50,7 +50,7 @@ const fluxo = {
     ],
   },
   destino_doacao: {
-    mensagem: "Você pode indicar para qual projeto deseja realizar a sua doação. Acesse a seção 'Doações'.",
+    mensagem: "Sua doação irá para melhora os projetos existentes e para ajudar crianças e idosos na comunidade'.",
     opcoes: [
       { texto: "Voltar ao menu principal", next: "inicio" },
       { texto: "Encerrar", next: "fim" },
@@ -59,21 +59,21 @@ const fluxo = {
   projetos: {
     mensagem: "Selecione o projeto da ONG que você gostaria de conhecer.",
     opcoes: [
-      { texto: "Judô", next: "projeto_judo" },
-      { texto: "Oficina de Costura", next: "projeto_costura" },
+      { texto: "Organizaçaõ de eventos", next: "projeto_judo" },
+      { texto: "Boa Idade", next: "projeto_costura" },
       { texto: "Atividades Recreativas", next: "atividade_recreativa" },
       { texto: "Voltar ao menu principal", next: "inicio" },
     ],
   },
   projeto_judo: {
-    mensagem: "Oferecemos aula de Judô para as crianças carentes da comunidade todos os finais de semana.",
+    mensagem: "Oferecemos eventos para comunidade como o dia das Mães, dias das Crianças, você pode visualizar mais sobre, na seção Projetos da nossa landingpage",
     opcoes: [
       { texto: "Voltar ao menu principal", next: "inicio" },
       { texto: "Encerrar", next: "fim" },
     ],
   },
   projeto_costura: {
-    mensagem: "Oferecemos aulas de costura para mulheres e idosos da comunidade. Entre em contato pelo WhatsApp.",
+    mensagem: "Oferecemos aulas de costura, artesanato, crochê para os idosos da comunidade. Gostaria de saber mais ? você pode visualizar na seção Projetos da nossa landingpage.",
     opcoes: [
       { texto: "Voltar ao menu principal", next: "inicio" },
       { texto: "Encerrar", next: "fim" },

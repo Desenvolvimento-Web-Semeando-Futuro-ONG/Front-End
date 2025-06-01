@@ -19,7 +19,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5189/api/Projeto/ativos")
+    fetch("https://back-end-n1cl.onrender.com/api/Projeto/ativos")
       .then((res) => res.json())
       .then((data) => setOpcoesProjetos(data))
       .catch((err) => console.error("Erro ao buscar projetos:", err));
@@ -40,7 +40,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
 
     try {
       const response = await fetch(
-        "http://localhost:5189/api/Projeto/inscrever",
+        "https://back-end-n1cl.onrender.com/api/Projeto/inscrever",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -72,6 +72,7 @@ const FormsVoluntario = ({ fecharFormulario }) => {
 
   const handleOk = () => {
     setMostrarModalSucesso(false);
+    fecharFormulario();
     navigate("/");
   };
 

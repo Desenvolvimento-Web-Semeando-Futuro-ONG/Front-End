@@ -39,7 +39,7 @@ const Header = () => {
   const fetchProjetos = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:5189/api/Projeto/admin", {
+      const response = await fetch("https://back-end-n1cl.onrender.com/api/Projeto/admin", {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -112,7 +112,7 @@ const Header = () => {
           : null,
       };
 
-      const response = await fetch("http://localhost:5189/api/Projeto", {
+      const response = await fetch("https://back-end-n1cl.onrender.com/api/Projeto", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -144,7 +144,7 @@ const Header = () => {
   const confirmToggleStatus = async () => {
     try {
       const token = localStorage.getItem("token");
-      const url = `http://localhost:5189/api/Projeto/${actionType.toLowerCase()}/${
+      const url = `https://back-end-n1cl.onrender.com/api/Projeto/${actionType.toLowerCase()}/${
         projetoToToggle.id
       }`;
       const response = await fetch(url, {
@@ -200,7 +200,7 @@ const Header = () => {
 
             {showCadastro ? (
               <div className="projetos-modal-conteudo">
-                <div className="modal-header">
+                <div className="modall-header">
                   <button className="voltar-btn" onClick={toggleCadastro}>
                     <FaArrowLeft />
                   </button>

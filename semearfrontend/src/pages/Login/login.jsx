@@ -28,7 +28,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5189/api/Auth/login",
+        "https://back-end-n1cl.onrender.com/api/Auth/login",
         {
           login: login,
           senha: senha,
@@ -153,9 +153,9 @@ const Login = () => {
                 <label>
                   <input type="checkbox" /> Lembrar de mim
                 </label>
-                <a href="#" onClick={() => setModoRecuperarSenha(true)}>
+                {/* <a href="#" onClick={() => setModoRecuperarSenha(true)}>
                   Esqueceu a senha?
-                </a>
+                </a> */}
               </div>
 
               <div className="captcha-container">

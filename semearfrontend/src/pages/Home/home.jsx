@@ -12,9 +12,6 @@ import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import criancaFoto from "../../assets/criança.foto.png";
 import fotoequipe from "../../assets/fotoequipe.png";
-import judocriancas from "../../assets/judo.png";
-import idosos from "../../assets/idosos.png";
-import recreativa from "../../assets/recreativa.png";
 import fotocard from "../../assets/fotocard.png";
 import idosa from "../../assets/idosafoto.png";
 import estudantes from "../../assets/estudantesfoto.png";
@@ -28,8 +25,10 @@ import FormsVoluntario from "../../components/FormsVoluntario/Voluntario";
 import { FaHandsHelping, FaBookOpen, FaBus, FaTshirt } from "react-icons/fa";
 import { FaMapMarkerAlt, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import ChatBoot from "../../components/ChatBoot/chatboot";
-import { FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
-
+import { FaInstagram, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
+import recreativa4 from "../../assets/fotorecreativa2.jpeg";
+import evento2 from "../../assets/evento2.jpeg";
+import judofoto4 from "../../assets/atividadeidoso.jpeg";
 
 const Home = () => {
   const [eventos, setEventos] = useState([]);
@@ -46,7 +45,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5189/api/Evento/publicados")
+    fetch("https://back-end-n1cl.onrender.com/api/Evento/publicados")
       .then((res) => res.json())
       .then((data) => setEventos(data))
       .catch((err) => console.error("Erro ao buscar eventos:", err));
@@ -213,32 +212,26 @@ const Home = () => {
         </div>
 
         <div className="projetos-grid">
-          <Link to="/projeto-judo">
+          <Link to="/boa-idade">
             <ProjetoCard
-              titulo="Judô para as Crianças"
-              descricao="Aula de judô para as crianças todos os finais de semana para crianças carentes da comunidade"
-              imagem={judocriancas}
+              titulo="Boa Idade"
+              descricao="Oficinas para idosos toda Quarta-Feira realizando atividades como costura e crochê"
+              imagem={judofoto4}
             />
           </Link>
-          <Link to="/projetos/recreativa">
+          <Link to="/recreativa">
             <ProjetoCard
               titulo="Atividades Recreativas"
               descricao="Oficinas divertidas para crianças e jovens nos finais de semana"
-              imagem={recreativa}
+              imagem={recreativa4}
             />
           </Link>
-          <Link to="/projetos/idosos">
-            <ProjetoCard
-              titulo="Atividades com Idosos"
-              descricao="Aulas de instrumentos e canto para jovens talentos"
-              imagem={idosos}
-            />
-          </Link>
-          <Link to="/projetos/eventos">
+
+          <Link to="/eventorecreativo" className="card-central">
             <ProjetoCard
               titulo="Organização de Eventos"
               descricao="Aulas de dança para promover saúde e autoestima"
-              imagem={fotocard}
+              imagem={evento2}
             />
           </Link>
         </div>
@@ -258,7 +251,7 @@ const Home = () => {
               <img
                 src={
                   evento.imagemUrl
-                    ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
+                    ? `https://back-end-n1cl.onrender.com/api/galeria/${evento.imagemUrl}`
                     : fotocard
                 }
                 alt={evento.nome}
@@ -385,7 +378,12 @@ const Home = () => {
                 <br />
                 oportunidades e esperança!
               </h3>
-              <button className="botao-doacao">Doação</button>
+              <button
+                className="botao-doacao"
+                onClick={() => navigate("/doacao")}
+              >
+                Doação
+              </button>
             </div>
           </div>
         </div>
@@ -421,31 +419,47 @@ const Home = () => {
         <ChatBoot />
       </section>
       <footer className="site-footer">
-      <div className="footer-content">
-        <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
-        <div className="social-icons">
-          <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <FaInstagram />
-          </a>
-          <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-            <FaFacebookF />
-          </a>
-          <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-            <FaLinkedinIn />
-          </a>
-          <a href="mailto:contato@seudominio.com" aria-label="E-mail">
-            <FaEnvelope />
-          </a>
+        <div className="footer-content">
+          <p>© 2025 Semeando o Futuro. Todos os direitos reservados.</p>
+          <div className="social-icons">
+            <a
+              href="https://www.instagram.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Instagram"
+            >
+              <FaInstagram />
+            </a>
+            <a
+              href="https://www.facebook.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Facebook"
+            >
+              <FaFacebookF />
+            </a>
+            <a
+              href="https://www.linkedin.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn />
+            </a>
+            <a href="mailto:contato@seudominio.com" aria-label="E-mail">
+              <FaEnvelope />
+            </a>
+          </div>
         </div>
-      </div>
-    </footer>
+      </footer>
       <a
-        href="https://wa.me/5581988430469?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
-        className="whatsapp-icon"
+        href="https://wa.me/5581986541494?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20ONG%20Semeando%20o%20Futuro."
+        className="whatsapp-button"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Contato via WhatsApp"
       >
-        <FaWhatsapp size={38} color="#25D366" />
+        <FaWhatsapp size={38} />
       </a>
     </>
   );

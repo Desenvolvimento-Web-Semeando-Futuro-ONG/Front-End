@@ -5,6 +5,7 @@ import Header from "../../components/Header/header";
 import "./styles.css";
 import fotocard from "../../assets/fotocard.png";
 import { FiEdit, FiTrash2, FiEye } from "react-icons/fi";
+import ilustracaoBanner from "../../assets/Component.svg";
 
 const TelaInicial = () => {
   const [rascunhos, setRascunhos] = useState([]);
@@ -15,7 +16,7 @@ const TelaInicial = () => {
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    fetch("http://localhost:5189/api/Evento/rascunhos", {
+    fetch("https://back-end-n1cl.onrender.com/api/Evento/rascunhos", {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -30,7 +31,7 @@ const TelaInicial = () => {
         setRascunhos([]);
       });
 
-    fetch("http://localhost:5189/api/Evento/publicados")
+    fetch("https://back-end-n1cl.onrender.com/api/Evento/publicados")
       .then((res) => {
         if (!res.ok) throw new Error("Erro ao buscar publicados");
         return res.json();
@@ -52,47 +53,49 @@ const TelaInicial = () => {
     setModalAberto(false);
   };
 
-const confirmarDeletar = () => {
-  if (!eventoParaDeletar) return;
+  const confirmarDeletar = () => {
+    if (!eventoParaDeletar) return;
 
-  console.log("Deletando evento ID:", eventoParaDeletar.id);
+    console.log("Deletando evento ID:", eventoParaDeletar.id);
 
-  const headers = {
-    "Authorization": `Bearer ${token}`,
-    "Content-Type": "application/json",
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    };
+
+    fetch(
+      `https://back-end-n1cl.onrender.com/api/Evento/${eventoParaDeletar.id}`,
+      {
+        method: "DELETE",
+        headers,
+      }
+    )
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(`Erro ao deletar. Status: ${res.status}`);
+        }
+
+        setRascunhos((prev) =>
+          prev.filter((e) => e.id !== eventoParaDeletar.id)
+        );
+        setPublicados((prev) =>
+          prev.filter((e) => e.id !== eventoParaDeletar.id)
+        );
+        fecharModal();
+      })
+      .catch((err) => {
+        console.error("Erro ao deletar evento:", err);
+        fecharModal();
+      });
   };
 
-  fetch(`http://localhost:5189/api/Evento/${eventoParaDeletar.id}`, {
-    method: "DELETE",
-    headers,
-  })
-    .then((res) => {
-      if (!res.ok) {
-        throw new Error(`Erro ao deletar. Status: ${res.status}`);
-      }
-
-      setRascunhos((prev) =>
-        prev.filter((e) => e.id !== eventoParaDeletar.id)
-      );
-      setPublicados((prev) =>
-        prev.filter((e) => e.id !== eventoParaDeletar.id)
-      );
-      fecharModal();
-    })
-    .catch((err) => {
-      console.error("Erro ao deletar evento:", err);
-      fecharModal();
+  const editarEvento = (evento) => {
+    navigate("/publicacao", {
+      state: {
+        eventoId: evento.id,
+      },
     });
-};
-
-const editarEvento = (evento) => {
-  navigate("/publicacao", { 
-    state: { 
-      eventoId: evento.id 
-    } 
-  });
-};
-
+  };
 
   const CardEvento = ({ evento, isRascunho }) => (
     <div className="card-publicacao">
@@ -100,7 +103,7 @@ const editarEvento = (evento) => {
         <img
           src={
             evento.imagemUrl
-              ? `http://localhost:5189/api/galeria/${evento.imagemUrl}`
+              ? `https://back-end-n1cl.onrender.com/api/galeria/${evento.imagemUrl}`
               : fotocard
           }
           alt={evento.nome}
@@ -110,11 +113,17 @@ const editarEvento = (evento) => {
         />
       </div>
       <div className="card-conteudo">
-        <span className={`card-status ${isRascunho ? "status-rascunho" : "status-publicado"}`}>
+        <span
+          className={`card-status ${
+            isRascunho ? "status-rascunho" : "status-publicado"
+          }`}
+        >
           {isRascunho ? "Escrevendo" : "Publicado"}
         </span>
         <div className="card-tituloo">{evento.nome}</div>
-        <div className={`card-progresso ${isRascunho ? "rascunho" : "publicado"}`}>
+        <div
+          className={`card-progresso ${isRascunho ? "rascunho" : "publicado"}`}
+        >
           <div className="barra"></div>
         </div>
         <div className="card-icones">
@@ -123,11 +132,19 @@ const editarEvento = (evento) => {
               <FiEdit />
             </button>
           ) : (
-            <button onClick={() => navigate(`/evento/${evento.id}`)} title="Visualizar">
+            <button
+              onClick={() => navigate(`/evento/${evento.id}`)}
+              title="Visualizar"
+            >
               <FiEye />
             </button>
           )}
-          <button onClick={() => abrirModalDeletar({ ...evento, publicado: !isRascunho })} title="Excluir">
+          <button
+            onClick={() =>
+              abrirModalDeletar({ ...evento, publicado: !isRascunho })
+            }
+            title="Excluir"
+          >
             <FiTrash2 />
           </button>
         </div>
@@ -140,7 +157,7 @@ const editarEvento = (evento) => {
       <Sidebar />
       <div className="main-content">
         <Header />
-        <div className="content">
+        <div className="contentt">
           <section className="banner-projeto">
             <div className="texto-banner">
               <span className="bem-vindo">Seja bem-vindo!</span>
@@ -148,8 +165,18 @@ const editarEvento = (evento) => {
                 Agradecemos por apoiar nossa missão. <br />
                 Vamos transformar vidas juntos.
               </h2>
-              <button className="botao-banner">Conheça mais</button>
             </div>
+            <img
+              src={ilustracaoBanner}
+              alt="Ilustração do banner"
+              className="imagem-banner imagem-esquerda"
+            />
+
+            <img
+              src={ilustracaoBanner}
+              alt="Ilustração do banner"
+              className="imagem-banner imagem-direita"
+            />
           </section>
 
           <section className="secao-eventos">
@@ -157,7 +184,11 @@ const editarEvento = (evento) => {
             <div className="grid-eventos">
               {rascunhos.length > 0 ? (
                 rascunhos.map((evento) => (
-                  <CardEvento key={evento.id} evento={evento} isRascunho={true} />
+                  <CardEvento
+                    key={evento.id}
+                    evento={evento}
+                    isRascunho={true}
+                  />
                 ))
               ) : (
                 <p>Nenhum rascunho encontrado.</p>
@@ -170,7 +201,11 @@ const editarEvento = (evento) => {
             <div className="grid-eventos">
               {publicados.length > 0 ? (
                 publicados.map((evento) => (
-                  <CardEvento key={evento.id} evento={evento} isRascunho={false} />
+                  <CardEvento
+                    key={evento.id}
+                    evento={evento}
+                    isRascunho={false}
+                  />
                 ))
               ) : (
                 <p>Nenhuma publicação encontrada.</p>
@@ -182,10 +217,11 @@ const editarEvento = (evento) => {
 
       {modalAberto && (
         <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Confirmar exclusão</h2>
-            <p>
-              Tem certeza que deseja deletar a publicação <strong>{eventoParaDeletar.nome}</strong>?
+          <div className="modal-contentt">
+            <h2 className="title-modall">Confirmar exclusão</h2>
+            <p className="modalparagrafo">
+              Tem certeza que deseja deletar a publicação{" "}
+              <strong>{eventoParaDeletar.nome}</strong>?
             </p>
             <div className="modal-buttons">
               <button className="btn-cancelar" onClick={fecharModal}>

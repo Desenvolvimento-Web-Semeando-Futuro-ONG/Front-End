@@ -5,7 +5,7 @@
     background-color: #f6fafd; 
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    /* height: 100vh; */
     transition: width 0.3s ease;
     font-family: 'Inter', sans-serif;
     position: relative;
@@ -115,7 +115,7 @@
 }
 
 .login-button:hover {
-  background-color: #6cab45; /* opcional: efeito hover */
+  background-color: #6cab45; 
 }
 
 .login-button .login-icon-white {
