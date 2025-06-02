@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: semear-frontend
+    runtime: node
+    buildCommand: npm install && npm run build
+    startCommand: serve -s build
+    env: node
+    staticPublishPath: "./build"
+    envVars:
+      - key: NODE_VERSION
+        value: 18.x
