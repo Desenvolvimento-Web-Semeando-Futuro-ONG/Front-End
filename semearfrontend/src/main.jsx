@@ -7,7 +7,7 @@ import Publicacao from "./pages/Publicacao/publicacao";
 import Judo from "./pages/Projetos/projetojudo";
 import Evento from "./pages/Evento/evento";
 import TelaInicial from "./pages/TelaInicial/telainicial";
-import ConfiguracoesAdm from "./pages/configuracao/configuracao";
+import ConfiguracoesAdm from "./pages/Configuracao/configuracao";
 import Voluntarios from "./pages/Voluntarios/voluntarios";
 import Doacao from "./pages/Doação/doacao";
 import Recreativa from "./pages/Projetos/projetorecreativas"
